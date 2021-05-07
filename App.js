@@ -26,6 +26,7 @@ function App() {
           headerTitleStyle: {
             fontWeight: 'normal',
           },
+          headerTitleAlign: 'center',
         }}>
         <Stack.Screen
           name="Transfer"
