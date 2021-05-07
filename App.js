@@ -9,13 +9,34 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {Text, View} from 'react-native';
-export default function App() {
+import {createStackNavigator} from '@react-navigation/stack';
+import Transfer from './src/screens/Transfer';
+const Stack = createStackNavigator();
+
+function App() {
   return (
     <NavigationContainer>
-      <View style={{flex: 1}}>
-        <Text>ahihi</Text>
-      </View>
+      <Stack.Navigator
+        initialRouteName="Transfer"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#0066B3',
+          },
+          headerTintColor: 'white',
+          headerTitleStyle: {
+            fontWeight: 'normal',
+          },
+        }}>
+        <Stack.Screen
+          name="Transfer"
+          component={Transfer}
+          options={{
+            title: 'Chuyển tiền',
+          }}
+        />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
+export default App;
