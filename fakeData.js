@@ -47,7 +47,7 @@ export default [
     subCategories: [
       {
         name: 'Quần áo',
-        iconName: 'restaurant-menu',
+        iconName: 'checkroom',
         contacts: [
           {
             nickname: 'Đô ăn Hàn Quốc',
@@ -70,11 +70,11 @@ export default [
         ],
       },
       {
-        name: 'Giày dép',
-        iconName: 'local-cafe',
+        name: 'Xe cộ',
+        iconName: 'two-wheeler',
         contacts: [
           {
-            nickname: 'The coffee house',
+            nickname: 'VinFast Xuân Thuỷ',
             realName: 'NGUYEN THUY NGOC',
             accountNumber: '004954054',
             bank: 'NH TMCP KY THUONG (TECHCOMBANK)',
@@ -83,7 +83,7 @@ export default [
       },
       {
         name: 'Phụ kiện',
-        iconName: 'local-cafe',
+        iconName: 'backpack',
         contacts: [
           {
             nickname: 'The coffee house',

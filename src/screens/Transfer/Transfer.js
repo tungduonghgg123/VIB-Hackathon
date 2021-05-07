@@ -11,7 +11,7 @@ const Transfer = () => {
       <View style={styles.transferOptionsContainer}>
         <IconText iconName="account-balance" text="Trong VIB" />
         <IconText iconName="account-balance" text="Ngoài VIB" />
-        <IconText iconName="account-balance" text="Đầu tư" />
+        <IconText iconName="assessment" text="Đầu tư" />
       </View>
       <ScrollView style={{flex: 0.9}}>
         <View style={styles.searchBarWrapper}>
@@ -21,6 +21,9 @@ const Transfer = () => {
             onChangeText={setSearch}
             containerStyle={styles.searchBarContainer}
             inputContainerStyle={styles.searchBarInputContainer}
+            inputStyle={{
+              fontSize: 14.4,
+            }}
             lightTheme={true}
           />
         </View>
@@ -55,10 +58,10 @@ const styles = {
   },
   searchBarInputContainer: {
     backgroundColor: '#F2F2F2',
-    // WHY 15
-    borderRadius: 15,
-    margin: 20,
-    marginVertical: 20,
+    borderRadius: 10,
+    marginHorizontal: 20,
+    marginVertical: 10,
+    height: 39,
   },
 };
 export default Transfer;

@@ -17,7 +17,11 @@ const IconText = ({
         alignItems: 'center',
       }}>
       <Icon name={iconName} type="material" color={color} />
-      {text && <Text style={{color}}>{text}</Text>}
+      {text && (
+        <Text style={{color, paddingLeft: direction === 'row' ? 9 : 0}}>
+          {text}
+        </Text>
+      )}
     </TouchableOpacity>
   );
 };

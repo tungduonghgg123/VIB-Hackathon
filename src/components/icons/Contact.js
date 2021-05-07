@@ -22,7 +22,7 @@ const Contact = ({
 };
 const styles = {
   container: {
-    paddingVertical: 20,
+    paddingVertical: 14,
     paddingLeft: 20,
     flexDirection: 'row',
   },
