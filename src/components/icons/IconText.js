@@ -2,11 +2,22 @@ import React from 'react';
 import {Button, Text, View} from 'react-native';
 import {Icon} from 'react-native-elements';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-const IconText = ({iconName, text}) => {
+const IconText = ({
+  iconName,
+  text,
+  direction = 'column',
+  color = 'white',
+  onPress = () => {},
+}) => {
   return (
-    <TouchableOpacity>
-      <Icon name={iconName} type="material" color="white" />
-      <Text style={{color: 'white'}}>{text}</Text>
+    <TouchableOpacity
+      onPress={onPress}
+      style={{
+        flexDirection: direction,
+        alignItems: 'center',
+      }}>
+      <Icon name={iconName} type="material" color={color} />
+      {text && <Text style={{color}}>{text}</Text>}
     </TouchableOpacity>
   );
 };

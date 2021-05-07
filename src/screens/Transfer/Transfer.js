@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
-import {Button, Text, View} from 'react-native';
+import {Button, ScrollView, Text, View} from 'react-native';
 import IconText from '../../components/icons/IconText';
 import {SearchBar} from 'react-native-elements';
-import Collapsible from 'react-native-collapsible';
-
+import CollapsibleCategory from './CollapsibleCategory';
+import data from '../../../fakeData';
 const Transfer = () => {
   const [search, setSearch] = useState('');
-  const [isCollapsed, setIsCollapsed] = useState(true);
   return (
     <View style={styles.container}>
       <View style={styles.transferOptionsContainer}>
@@ -14,23 +13,28 @@ const Transfer = () => {
         <IconText iconName="account-balance" text="Ngoài VIB" />
         <IconText iconName="account-balance" text="Đầu tư" />
       </View>
-      <View style={styles.searchBarWrapper}>
-        <SearchBar
-          placeholder="Tìm kiếm người thụ hưởng"
-          value={search}
-          onChangeText={setSearch}
-          containerStyle={styles.searchBarContainer}
-          inputContainerStyle={styles.searchBarInputContainer}
-          lightTheme={true}
-        />
-      </View>
-      <Collapsible collapsed={isCollapsed} />
+      <ScrollView style={{flex: 0.9}}>
+        <View style={styles.searchBarWrapper}>
+          <SearchBar
+            placeholder="Tìm kiếm người thụ hưởng"
+            value={search}
+            onChangeText={setSearch}
+            containerStyle={styles.searchBarContainer}
+            inputContainerStyle={styles.searchBarInputContainer}
+            lightTheme={true}
+          />
+        </View>
+        {data.map(category => (
+          <CollapsibleCategory key={Math.random() * 100} {...category} />
+        ))}
+      </ScrollView>
     </View>
   );
 };
 const styles = {
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
   transferOptionsContainer: {
     backgroundColor: '#FAA934',
