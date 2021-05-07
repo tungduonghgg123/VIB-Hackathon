@@ -10,7 +10,7 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import Transfer from './src/screens/Transfer';
+import Transfer from './src/screens/Transfer/Transfer';
 const Stack = createStackNavigator();
 
 function App() {

@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import {Button, Text, View} from 'react-native';
-import IconText from '../components/icons/IconText';
+import IconText from '../../components/icons/IconText';
 import {SearchBar} from 'react-native-elements';
+import Collapsible from 'react-native-collapsible';
 
 const Transfer = () => {
   const [search, setSearch] = useState('');
+  const [isCollapsed, setIsCollapsed] = useState(true);
   return (
     <View style={styles.container}>
       <View style={styles.transferOptionsContainer}>
@@ -22,6 +24,7 @@ const Transfer = () => {
           lightTheme={true}
         />
       </View>
+      <Collapsible collapsed={isCollapsed} />
     </View>
   );
 };
