@@ -7,6 +7,9 @@ const Contact = ({
   realName = '',
   accountNumber = '',
   bank = '',
+  titleStyle,
+  subTitleStyle,
+  iconSize,
 }) => {
   const navigation = useNavigation();
   return (
@@ -18,12 +21,26 @@ const Contact = ({
           accountNumber,
         })
       }>
-      <IconText iconName="account-circle" color="#0066B3" />
+      <IconText iconName="account-circle" color="#0066B3" iconSize={iconSize} />
       <View style={styles.textContainer}>
-        <Text style={styles.title}>{nickname}</Text>
-        <Text style={styles.subTitle}>{realName}</Text>
-        <Text style={styles.subTitle}>{accountNumber}</Text>
-        <Text style={styles.subTitle}>{bank}</Text>
+        {nickname ? (
+          <Text style={titleStyle || styles.titleDefaultStyle}>{nickname}</Text>
+        ) : null}
+        {realName ? (
+          <Text style={subTitleStyle || styles.subTitleDefaultStyle}>
+            {realName}
+          </Text>
+        ) : null}
+        {accountNumber ? (
+          <Text style={subTitleStyle || styles.subTitleDefaultStyle}>
+            {accountNumber}
+          </Text>
+        ) : null}
+        {bank ? (
+          <Text style={subTitleStyle || styles.subTitleDefaultStyle}>
+            {bank}
+          </Text>
+        ) : null}
       </View>
     </TouchableOpacity>
   );
@@ -37,10 +54,10 @@ const styles = {
   textContainer: {
     marginLeft: 9.4,
   },
-  title: {
+  titleDefaultStyle: {
     fontSize: 12,
   },
-  subTitle: {
+  subTitleDefaultStyle: {
     fontSize: 10,
     color: '#7A7A7A',
   },
