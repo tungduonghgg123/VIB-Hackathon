@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
-import {Button, Text, View} from 'react-native';
+import {View} from 'react-native';
 import IconText from '../../components/icons/IconText';
-import {SearchBar} from 'react-native-elements';
 import Collapsible from 'react-native-collapsible';
-import {Icon} from 'react-native-elements/dist/icons/Icon';
 import Contact from '../../components/icons/Contact';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const CollapsibleCategory = ({
   name = '',
@@ -12,22 +11,24 @@ const CollapsibleCategory = ({
   subCategories = [],
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const onHeaderPress = () => setIsCollapsed(!isCollapsed);
   return (
     <View>
-      <View style={styles.header}>
+      <TouchableOpacity onPress={onHeaderPress} style={styles.header}>
         <IconText
           iconName={iconName}
           text={name}
           direction="row"
           color="black"
+          onPress={onHeaderPress}
         />
         <IconText
           iconName={isCollapsed ? 'expand-more' : 'expand-less'}
           direction="row"
           color="black"
-          onPress={() => setIsCollapsed(!isCollapsed)}
+          onPress={onHeaderPress}
         />
-      </View>
+      </TouchableOpacity>
 
       <Collapsible collapsed={isCollapsed}>
         {subCategories.map(subCategory => (
