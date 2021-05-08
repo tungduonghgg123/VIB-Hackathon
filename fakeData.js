@@ -97,7 +97,7 @@ export const categories = [
   },
 ];
 export const InternalTransferOptions = [
-  'SỐ TÀI KHOẢN',
-  'SỐ ĐIỆN THOẠI',
-  'CÁ NHÂN',
+  {name: 'SỐ TÀI KHOẢN', disabled: false},
+  {name: 'SỐ ĐIỆN THOẠI', disabled: true},
+  {name: 'CÁ NHÂN', disabled: true},
 ];

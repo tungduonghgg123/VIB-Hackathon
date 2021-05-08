@@ -8,11 +8,12 @@ const Tabs = () => {
     <Tab onChange={setTab} value={tab} indicatorStyle={styles.indicatorStyle}>
       {InternalTransferOptions.map(option => (
         <Tab.Item
-          key={option}
+          key={option.name}
           titleStyle={styles.tabTitle}
           buttonStyle={styles.tab}
           containerStyle={styles.tabContainer}
-          title={option}
+          title={option.name}
+          //   disabled={option.disabled}
         />
       ))}
     </Tab>
@@ -23,7 +24,7 @@ const styles = {
     backgroundColor: '#F7941D',
     width: 80,
     height: 3,
-    left: 25,
+    left: 22,
   },
   tabTitle: {
     fontSize: 12,
