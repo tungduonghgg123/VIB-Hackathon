@@ -4,6 +4,7 @@ import {Icon} from 'react-native-elements';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 const IconText = ({
   iconName,
+  iconSize = 20,
   text,
   direction = 'column',
   color = 'white',
@@ -16,7 +17,7 @@ const IconText = ({
         flexDirection: direction,
         alignItems: 'center',
       }}>
-      <Icon name={iconName} type="material" color={color} />
+      <Icon name={iconName} type="material" color={color} size={iconSize} />
       {text && (
         <Text style={{color, paddingLeft: direction === 'row' ? 9 : 0}}>
           {text}
