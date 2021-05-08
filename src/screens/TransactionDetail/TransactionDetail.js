@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, View, TextInput} from 'react-native';
+import {ScrollView, View, TextInput, Text} from 'react-native';
 import {SafeAreaView} from 'react-native';
 import Contact from '../../components/icons/Contact';
 import Card from '../../components/Card';
@@ -24,21 +24,30 @@ const TransactionDetail = ({route}) => {
         <Card style={styles.inputAmountContainer}>
           <TextInput
             style={styles.text}
+            placeholderTextColor="#979797"
             placeholder="Nhập số tiền"
             keyboardType="numeric"
           />
         </Card>
         <Card style={styles.balanceContainer}>
           <IconText color="black" iconName="account-balance-wallet" />
+          <View style={{marginLeft: 26}}>
+            <Text style={[styles.text]}>Từ tài khoản</Text>
+            <Text style={styles.text}>
+              23102000 - <Text style={{color: '#0066B3'}}>300,000 VND</Text>
+            </Text>
+          </View>
         </Card>
         <Card style={styles.inputAmountContainer}>
           <TextInput
+            placeholderTextColor="#979797"
             style={styles.text}
             placeholder="Nội dung (không bắt buộc)"
           />
         </Card>
         <Card style={styles.inputAmountContainer}>
           <TextInput
+            placeholderTextColor="#979797"
             style={styles.text}
             placeholder="Ghi chú (không bắt buộc)"
           />
@@ -53,7 +62,6 @@ const styles = {
     backgroundColor: '#0066B3',
   },
   contactContainer: {
-    flex: 0.1,
     paddingLeft: 11,
     paddingTop: 0,
   },
@@ -67,14 +75,16 @@ const styles = {
     flex: 0.08,
     paddingLeft: 31,
     paddingTop: 0,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   contact: {
     fontSize: 15,
   },
   text: {
     fontSize: 13,
+    color: '#979797',
   },
 };
 export default TransactionDetail;
