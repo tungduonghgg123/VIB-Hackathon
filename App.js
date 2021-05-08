@@ -18,7 +18,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="InternalTransfer"
+        initialRouteName="Transfer"
         screenOptions={{
           headerStyle: {
             backgroundColor: '#0066B3',

@@ -4,12 +4,16 @@ import IconText from '../../components/icons/IconText';
 import {SearchBar} from 'react-native-elements';
 import CollapsibleCategory from './CollapsibleCategory';
 import {categories} from '../../../fakeData';
-const Transfer = () => {
+const Transfer = ({navigation}) => {
   const [search, setSearch] = useState('');
   return (
     <View style={styles.container}>
       <View style={styles.transferOptionsContainer}>
-        <IconText iconName="account-balance" text="Trong VIB" />
+        <IconText
+          iconName="account-balance"
+          text="Trong VIB"
+          onPress={() => navigation.navigate('InternalTransfer')}
+        />
         <IconText iconName="account-balance" text="Ngoài VIB" />
         <IconText iconName="assessment" text="Đầu tư" />
       </View>

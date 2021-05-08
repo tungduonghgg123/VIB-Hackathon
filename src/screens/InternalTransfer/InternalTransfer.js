@@ -1,13 +1,17 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, ScrollView, Text, View} from 'react-native';
 import Tabs from '../../components/Tabs';
 import {Input} from 'react-native-elements';
 
-const InternalTransfer = ({
-  bankNumber = '',
-  realName = 'Vu Thi Quynh Huong',
-}) => {
-  const [bankNumberInput, setBankNumberInput] = useState(bankNumber);
+const InternalTransfer = ({route}) => {
+  const [bankNumberInput, setBankNumberInput] = useState('');
+  const [realName, setRealName] = useState('');
+  useEffect(() => {
+    if (route.params) {
+      setBankNumberInput(route.params.accountNumber);
+      setRealName(route.params.realName);
+    }
+  }, [route.params]);
   return (
     <View style={styles.container}>
       <ScrollView
@@ -19,11 +23,16 @@ const InternalTransfer = ({
           labelStyle={styles.inputLabel}
           inputStyle={styles.input}
           value={bankNumberInput}
-          onChange={setBankNumberInput}
+          onChangeText={setBankNumberInput}
           label="Nhập số tài khoản"
           keyboardType="numeric"
         />
-        <Input disabled={true} value={realName} inputStyle={styles.input} />
+        <Input
+          disabled={route.params}
+          value={realName}
+          onChangeText={value => setRealName(value.toUpperCase())}
+          inputStyle={styles.input}
+        />
       </ScrollView>
     </View>
   );
