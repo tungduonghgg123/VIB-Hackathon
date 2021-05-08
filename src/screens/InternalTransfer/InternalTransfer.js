@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {Button, ScrollView, Text, View} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import Tabs from '../../components/Tabs';
 import {Input} from 'react-native-elements';
+import VIBButton from '../../components/VIBButton';
+import {SafeAreaView} from 'react-native';
 
 const InternalTransfer = ({route}) => {
   const [bankNumberInput, setBankNumberInput] = useState('');
@@ -13,7 +15,7 @@ const InternalTransfer = ({route}) => {
     }
   }, [route.params]);
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ScrollView
         contentContainerStyle={styles.transferContainer}
         keyboardShouldPersistTaps="handled">
@@ -34,7 +36,8 @@ const InternalTransfer = ({route}) => {
           inputStyle={styles.input}
         />
       </ScrollView>
-    </View>
+      <VIBButton title="tiếp tục" />
+    </SafeAreaView>
   );
 };
 const styles = {

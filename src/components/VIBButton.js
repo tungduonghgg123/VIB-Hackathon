@@ -6,6 +6,7 @@ const VIBButton = ({title}) => {
       type="solid"
       buttonStyle={styles.button}
       title={title.toUpperCase()}
+      titleStyle={styles.title}
     />
   );
 };
@@ -14,6 +15,9 @@ const styles = {
     backgroundColor: '#F7941D',
     borderRadius: 10,
     marginHorizontal: 11,
+  },
+  title: {
+    fontSize: 15,
   },
 };
 export default VIBButton;
