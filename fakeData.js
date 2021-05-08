@@ -1,4 +1,4 @@
-export default [
+export const categories = [
   {
     name: 'Ăn uống',
     iconName: 'local-pizza',
@@ -95,4 +95,9 @@ export default [
       },
     ],
   },
+];
+export const InternalTransferOptions = [
+  'SỐ TÀI KHOẢN',
+  'SỐ ĐIỆN THOẠI',
+  'CÁ NHÂN',
 ];
