@@ -1,5 +1,23 @@
 export const categories = [
   {
+    name: 'Cá nhân',
+    iconName: 'person',
+    subCategories: [
+      {
+        name: undefined,
+        iconName: undefined,
+        contacts: [
+          {
+            nickname: 'Thu Ngok',
+            realName: 'NGUYEN THI HA THU',
+            accountNumber: '123455677',
+            bank: 'NH TMCP KY THUONG (TECHCOMBANK)',
+          },
+        ],
+      },
+    ],
+  },
+  {
     name: 'Ăn uống',
     iconName: 'local-pizza',
     subCategories: [

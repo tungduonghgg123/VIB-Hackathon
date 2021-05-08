@@ -32,14 +32,16 @@ const CollapsibleCategory = ({
       <Collapsible collapsed={isCollapsed}>
         {subCategories.map(subCategory => (
           <View key={Math.random() * 100} style={styles.collapsibleContainer}>
-            <View style={{alignSelf: 'center'}}>
-              <IconText
-                iconName={subCategory.iconName}
-                text={subCategory.name}
-                color="black"
-                direction="row"
-              />
-            </View>
+            {subCategory.name && (
+              <View style={{alignSelf: 'center'}}>
+                <IconText
+                  iconName={subCategory.iconName}
+                  text={subCategory.name}
+                  color="black"
+                  direction="row"
+                />
+              </View>
+            )}
             {subCategory.contacts.map(contact => (
               <Contact key={Math.random() * 100} {...contact} />
             ))}
