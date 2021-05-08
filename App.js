@@ -11,13 +11,14 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Transfer from './src/screens/Transfer/Transfer';
+import InternalTransfer from './src/screens/InternalTransfer/InternalTransfer';
 const Stack = createStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Transfer"
+        initialRouteName="InternalTransfer"
         screenOptions={{
           headerStyle: {
             backgroundColor: '#0066B3',
@@ -33,6 +34,13 @@ function App() {
           component={Transfer}
           options={{
             title: 'Chuyển tiền',
+          }}
+        />
+        <Stack.Screen
+          name="InternalTransfer"
+          component={InternalTransfer}
+          options={{
+            title: 'Chuyển khoản trong VIB',
           }}
         />
       </Stack.Navigator>
