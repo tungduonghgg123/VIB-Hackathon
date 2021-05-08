@@ -10,11 +10,13 @@ const Contact = ({
   titleStyle,
   subTitleStyle,
   iconSize,
+  disabled = false,
 }) => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
       style={styles.container}
+      disabled={disabled}
       onPress={() =>
         navigation.navigate('InternalTransfer', {
           realName,
