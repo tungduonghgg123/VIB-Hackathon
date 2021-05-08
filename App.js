@@ -13,6 +13,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Transfer from './src/screens/Transfer/Transfer';
 import InternalTransfer from './src/screens/InternalTransfer/InternalTransfer';
+import TransactionDetail from './src/screens/TransactionDetail/TransactionDetail';
 const Stack = createStackNavigator();
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Transfer"
+          initialRouteName="TransactionDetail"
           screenOptions={{
             headerStyle: {
               backgroundColor: '#0066B3',
@@ -43,6 +44,13 @@ function App() {
             component={InternalTransfer}
             options={{
               title: 'Chuyển khoản trong VIB',
+            }}
+          />
+          <Stack.Screen
+            name="TransactionDetail"
+            component={TransactionDetail}
+            options={{
+              title: 'Chi tiết giao dịch',
             }}
           />
         </Stack.Navigator>

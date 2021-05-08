@@ -5,7 +5,7 @@ import {Input} from 'react-native-elements';
 import VIBButton from '../../components/VIBButton';
 import {SafeAreaView} from 'react-native';
 
-const InternalTransfer = ({route}) => {
+const InternalTransfer = ({route, navigation}) => {
   const [bankNumberInput, setBankNumberInput] = useState('');
   const [realName, setRealName] = useState('');
   useEffect(() => {
@@ -36,7 +36,10 @@ const InternalTransfer = ({route}) => {
           inputStyle={styles.input}
         />
       </ScrollView>
-      <VIBButton title="tiếp tục" />
+      <VIBButton
+        title="tiếp tục"
+        onPress={() => navigation.navigate('TransactionDetail')}
+      />
     </SafeAreaView>
   );
 };
