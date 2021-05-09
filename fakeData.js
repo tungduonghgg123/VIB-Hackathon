@@ -123,28 +123,15 @@ export const categories = {
   'Ăn uống': {
     iconName: 'local-pizza',
     subCategories: [
-      {name: 'Ăn uống', iconName: 'local-pizza'},
-      {name: 'Phụ kiện', iconName: 'backpack'},
-    ],
-  },
-  'Phụ kiện': {
-    iconName: 'backpack',
-    subCategories: [
-      {name: 'Ăn uống', iconName: 'local-pizza'},
-      {name: 'Phụ kiện', iconName: 'backpack'},
-    ],
-  },
-  'Xe cộ': {
-    iconName: 'two-wheeler',
-    subCategories: [
-      {name: 'Ăn uống', iconName: 'local-pizza'},
-      {name: 'Phụ kiện', iconName: 'backpack'},
+      {name: 'Nhà hàng', iconName: 'restaurant-menu'},
+      {name: 'Cafe', iconName: 'local-cafe'},
     ],
   },
   'Mua sắm': {
     iconName: 'shopping-cart',
     subCategories: [
-      {name: 'Ăn uống', iconName: 'local-pizza'},
+      {name: 'Quần áo', iconName: 'checkroom'},
+      {name: 'Xe cộ', iconName: 'two-wheeler'},
       {name: 'Phụ kiện', iconName: 'backpack'},
     ],
   },
