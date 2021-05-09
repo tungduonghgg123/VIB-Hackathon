@@ -1,4 +1,4 @@
-export const categories = [
+export const contactByCategories = [
   {
     name: 'Cá nhân',
     iconName: 'person',
@@ -118,4 +118,10 @@ export const InternalTransferOptions = [
   {name: 'SỐ TÀI KHOẢN', disabled: false},
   {name: 'SỐ ĐIỆN THOẠI', disabled: true},
   {name: 'CÁ NHÂN', disabled: true},
+];
+export const categories = [
+  {name: 'Ăn uống', iconName: 'local-pizza'},
+  {name: 'Phụ kiện', iconName: 'backpack'},
+  {name: 'Xe cộ', iconName: 'two-wheeler'},
+  {name: 'Mua sắm', iconName: 'shopping-cart'},
 ];

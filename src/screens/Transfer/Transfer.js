@@ -3,7 +3,7 @@ import {Button, ScrollView, Text, View} from 'react-native';
 import IconText from '../../components/icons/IconText';
 import {SearchBar} from 'react-native-elements';
 import CollapsibleCategory from './CollapsibleCategory';
-import {categories} from '../../../fakeData';
+import {contactByCategories} from '../../../fakeData';
 const Transfer = ({navigation}) => {
   const [search, setSearch] = useState('');
   return (
@@ -31,7 +31,7 @@ const Transfer = ({navigation}) => {
             lightTheme={true}
           />
         </View>
-        {categories.map(category => (
+        {contactByCategories.map(category => (
           <CollapsibleCategory key={Math.random() * 100} {...category} />
         ))}
       </ScrollView>
