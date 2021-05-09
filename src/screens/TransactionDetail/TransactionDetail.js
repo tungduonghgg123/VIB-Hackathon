@@ -6,7 +6,10 @@ import Card from '../../components/Card';
 import IconText from '../../components/icons/IconText';
 import SelectCategories from '../../components/SelectCategories';
 import VIBButton from '../../components/VIBButton';
-const TransactionDetail = ({route}) => {
+const TransactionDetail = ({route, navigation}) => {
+  const [amount, setAmount] = useState('');
+  const [fullCategory, setFullCategory] = useState('');
+
   return (
     <SafeAreaView style={styles.container}>
       <View
@@ -34,6 +37,14 @@ const TransactionDetail = ({route}) => {
             placeholder="Nhập số tiền"
             keyboardType="numeric"
             returnKeyType="done"
+            onChangeText={text => {
+              setAmount(
+                text
+                  .replace(/,/g, '')
+                  .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,'),
+              );
+            }}
+            value={amount}
           />
         </Card>
         <Card style={styles.balanceContainer}>
@@ -52,7 +63,7 @@ const TransactionDetail = ({route}) => {
             placeholder="Nội dung (không bắt buộc)"
           />
         </Card>
-        <SelectCategories />
+        <SelectCategories setFullCategory={setFullCategory} />
         <Card style={styles.inputAmountContainer}>
           <TextInput
             placeholderTextColor="#979797"
@@ -61,7 +72,17 @@ const TransactionDetail = ({route}) => {
           />
         </Card>
       </View>
-      <VIBButton title="tiếp tục" />
+      <VIBButton
+        title="tiếp tục"
+        onPress={() =>
+          navigation.navigate('Confirm', {
+            amount,
+            fullCategory,
+            accountNumber: route.params?.accountNumber,
+            realName: route.params?.realName,
+          })
+        }
+      />
     </SafeAreaView>
   );
 };
