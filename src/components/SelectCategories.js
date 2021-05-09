@@ -1,15 +1,18 @@
 /* eslint-disable no-sparse-arrays */
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import IconText from './icons/IconText';
 import Card from './Card';
 import {categories} from '../../fakeData';
 
-const SelectCategories = () => {
+const SelectCategories = ({setFullCategory}) => {
   const [selectedCategory, setCategory] = useState('');
   const [selectedSubCategory, setSubCategory] = useState('');
   const [isCollapsed, setIsCollapsed] = useState(true);
+  useEffect(() => {
+    setFullCategory(selectedCategory + ' - ' + selectedSubCategory);
+  }, [selectedCategory, selectedSubCategory, setFullCategory]);
   const onHeaderPress = () => setIsCollapsed(!isCollapsed);
   const renderAddCategories = title => (
     <View key={title} style={{marginVertical: 11}}>
