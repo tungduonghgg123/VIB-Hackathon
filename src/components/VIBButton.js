@@ -14,7 +14,7 @@ const VIBButton = ({title, onPress = () => {}}) => {
 const styles = {
   button: {
     backgroundColor: '#F7941D',
-    borderRadius: 10,
+    borderRadius: 5,
     marginHorizontal: 11,
   },
   title: {
