@@ -3,10 +3,21 @@ import {ScrollView, Text, View} from 'react-native';
 import VIBButton from '../../components/VIBButton';
 import {SafeAreaView} from 'react-native';
 import FieldValue from '../../components/FieldValue';
-
+import RadioForm, {
+  RadioButton,
+  RadioButtonInput,
+  RadioButtonLabel,
+} from 'react-native-simple-radio-button';
+var radio_props = [
+  {label: 'Lưu thông tin người thụ hưởng', value: 0},
+  {label: 'Lưu thông tin người thụ hưởng kèm Danh mục chi tiêu', value: 1},
+  ,
+];
 const Confirm = ({route, navigation}) => {
   // Nếu như mà không có route.params thì sao?
-  const {amount, fullCategory, accountNumber, realName} = route.params;
+  const {amount, fullCategory, accountNumber, realName} = route.params || {};
+  const [value, setValue] = useState(0);
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
@@ -18,7 +29,6 @@ const Confirm = ({route, navigation}) => {
           </Text>
         </View>
         <FieldValue field="Số tiền" value={`${amount} VND`} blueValue />
-
         <FieldValue field="Từ tài khoản" value="23102000" />
         <FieldValue field="Danh mục chi tiêu" value={fullCategory} />
         <View style={styles.separater} />
@@ -26,6 +36,38 @@ const Confirm = ({route, navigation}) => {
         <FieldValue field="Số tài khoản" value={accountNumber} />
         <FieldValue field="Ngân hàng" value="TP Bank" />
         <FieldValue field="Phí giao dịch" value="0 VND" blueValue />
+        <RadioForm style={{marginTop: 10}}>
+          {radio_props.map((obj, i) => (
+            <RadioButton key={i}>
+              <RadioButtonInput
+                obj={obj}
+                index={i}
+                isSelected={value === i}
+                onPress={setValue}
+                borderWidth={1}
+                buttonInnerColor={'#0066B3'}
+                buttonOuterColor={'#0066B3'}
+                buttonSize={10}
+                buttonOuterSize={18}
+                buttonStyle={{}}
+                buttonWrapStyle={{marginLeft: 11}}
+              />
+              <RadioButtonLabel
+                obj={obj}
+                index={i}
+                labelHorizontal={true}
+                onPress={setValue}
+                labelStyle={{
+                  fontSize: 14,
+                  width: 350,
+                  flexWrap: 'wrap',
+                  alignItems: 'flex-start',
+                }}
+                labelWrapStyle={{}}
+              />
+            </RadioButton>
+          ))}
+        </RadioForm>
       </ScrollView>
       <VIBButton
         title="xác nhận"
