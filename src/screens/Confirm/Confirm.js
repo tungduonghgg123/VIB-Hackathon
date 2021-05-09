@@ -72,7 +72,11 @@ const Confirm = ({route, navigation}) => {
         </RadioForm>
         {value !== -1 && (
           <View
-            style={{...styles.pleaseConfirmContainer, marginHorizontal: 11}}>
+            style={{
+              ...styles.pleaseConfirmContainer,
+              marginHorizontal: 11,
+              flex: 0.06,
+            }}>
             <TextInput
               style={styles.pleaseConfirmText}
               placeholderTextColor="#979797"
