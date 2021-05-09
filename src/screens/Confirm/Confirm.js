@@ -16,8 +16,10 @@ var radio_props = [
 const Confirm = ({route, navigation}) => {
   // Nếu như mà không có route.params thì sao?
   const {amount, fullCategory, accountNumber, realName} = route.params || {};
-  const [value, setValue] = useState(0);
-
+  const [value, setValue] = useState(-1);
+  const onRadioButtonPress = newValue => {
+    newValue === value ? setValue(-1) : setValue(newValue);
+  };
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
@@ -43,7 +45,7 @@ const Confirm = ({route, navigation}) => {
                 obj={obj}
                 index={i}
                 isSelected={value === i}
-                onPress={setValue}
+                onPress={onRadioButtonPress}
                 borderWidth={1}
                 buttonInnerColor={'#0066B3'}
                 buttonOuterColor={'#0066B3'}
@@ -56,7 +58,7 @@ const Confirm = ({route, navigation}) => {
                 obj={obj}
                 index={i}
                 labelHorizontal={true}
-                onPress={setValue}
+                onPress={onRadioButtonPress}
                 labelStyle={{
                   fontSize: 14,
                   width: 350,
