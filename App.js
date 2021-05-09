@@ -14,6 +14,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Transfer from './src/screens/Transfer/Transfer';
 import InternalTransfer from './src/screens/InternalTransfer/InternalTransfer';
 import TransactionDetail from './src/screens/TransactionDetail/TransactionDetail';
+import Confirm from './src/screens/Confirm/Confirm';
 const Stack = createStackNavigator();
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="TransactionDetail"
+          initialRouteName="Transfer"
           screenOptions={{
             headerStyle: {
               backgroundColor: '#0066B3',
@@ -51,6 +52,13 @@ function App() {
             component={TransactionDetail}
             options={{
               title: 'Chi tiết giao dịch',
+            }}
+          />
+          <Stack.Screen
+            name="Confirm"
+            component={Confirm}
+            options={{
+              title: 'Xác nhận thông tin',
             }}
           />
         </Stack.Navigator>
