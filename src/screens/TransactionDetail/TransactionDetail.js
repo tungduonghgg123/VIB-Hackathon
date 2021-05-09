@@ -52,7 +52,8 @@ const TransactionDetail = ({route, navigation}) => {
           <View style={{marginLeft: 26}}>
             <Text style={[styles.text]}>Từ tài khoản</Text>
             <Text style={styles.text}>
-              23102000 - <Text style={{color: '#0066B3'}}>300,000 VND</Text>
+              002098444416 -
+              <Text style={{color: '#0066B3'}}> 300,000,000 VND</Text>
             </Text>
           </View>
         </Card>
