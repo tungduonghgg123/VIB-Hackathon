@@ -33,6 +33,7 @@ const TransactionDetail = ({route}) => {
             placeholderTextColor="#979797"
             placeholder="Nhập số tiền"
             keyboardType="numeric"
+            returnKeyType="done"
           />
         </Card>
         <Card style={styles.balanceContainer}>
