@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Collapsible from 'react-native-collapsible';
-import {Text, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import IconText from './icons/IconText';
 import Card from './Card';
@@ -16,7 +16,8 @@ const SelectCategories = () => {
   const onHeaderPress = () => setIsCollapsed(!isCollapsed);
   return (
     <>
-      <Card style={styles.container}>
+      {/* weird behaviour happens when using array style */}
+      <Card style={{...styles.container, marginBottom: isCollapsed ? 11 : -7}}>
         <TouchableOpacity onPress={onHeaderPress} style={styles.header}>
           <Text style={styles.text}>{category}</Text>
           <View style={{position: 'absolute', right: 10}}>
@@ -55,7 +56,6 @@ const styles = {
     flex: 0.08,
     justifyContent: 'center',
     paddingTop: 0,
-    marginBottom: 0,
   },
   header: {
     flexDirection: 'row',
@@ -68,9 +68,12 @@ const styles = {
   collapsible: {
     alignItems: 'flex-start',
     paddingLeft: 31,
-    backgroundColor: 'pink',
+    backgroundColor: 'white',
+    marginHorizontal: 11,
+    marginBottom: 11,
     // If delete below line, the view above it will be shrinked
-    flex: 0.2,
+    flex: 0.3,
+    borderRadius: 5,
   },
 };
 export default SelectCategories;
