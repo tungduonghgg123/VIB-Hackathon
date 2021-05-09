@@ -29,7 +29,7 @@ const SelectCategories = () => {
           </View>
         </TouchableOpacity>
       </Card>
-      <Collapsible collapsed={isCollapsed}>
+      {!isCollapsed && (
         <View style={styles.collapsible}>
           {categories.map(_category => (
             <View key={_category.name} style={{marginVertical: 11}}>
@@ -46,7 +46,7 @@ const SelectCategories = () => {
             </View>
           ))}
         </View>
-      </Collapsible>
+      )}
     </>
   );
 };
@@ -55,6 +55,7 @@ const styles = {
     flex: 0.08,
     justifyContent: 'center',
     paddingTop: 0,
+    marginBottom: 0,
   },
   header: {
     flexDirection: 'row',
@@ -68,6 +69,7 @@ const styles = {
     alignItems: 'flex-start',
     paddingLeft: 31,
     backgroundColor: 'pink',
+    // If delete below line, the view above it will be shrinked
     flex: 0.2,
   },
 };
