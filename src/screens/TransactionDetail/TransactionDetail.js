@@ -4,12 +4,18 @@ import {SafeAreaView} from 'react-native';
 import Contact from '../../components/icons/Contact';
 import Card from '../../components/Card';
 import IconText from '../../components/icons/IconText';
+import SelectCategories from '../../components/SelectCategories';
 
 const TransactionDetail = ({route}) => {
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView
-        contentContainerStyle={{flexGrow: 1}}
+      <View
+        // contentContainerStyle={{
+        //   flexGrow: 1,
+        //   backgroundColor: 'yellow',
+        //   flexShrink: 0,
+        // }}
+        style={{flex: 1}}
         bounces={false}
         keyboardShouldPersistTaps="handled">
         <Card style={styles.contactContainer}>
@@ -45,6 +51,7 @@ const TransactionDetail = ({route}) => {
             placeholder="Nội dung (không bắt buộc)"
           />
         </Card>
+        <SelectCategories />
         <Card style={styles.inputAmountContainer}>
           <TextInput
             placeholderTextColor="#979797"
@@ -52,7 +59,7 @@ const TransactionDetail = ({route}) => {
             placeholder="Ghi chú (không bắt buộc)"
           />
         </Card>
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };
