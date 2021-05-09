@@ -1,3 +1,4 @@
+/* eslint-disable no-sparse-arrays */
 import React, {useState} from 'react';
 import {Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -10,36 +11,51 @@ const SelectCategories = () => {
   const [selectedSubCategory, setSubCategory] = useState('');
   const [isCollapsed, setIsCollapsed] = useState(true);
   const onHeaderPress = () => setIsCollapsed(!isCollapsed);
+  const renderAddCategories = title => (
+    <View key={title} style={{marginVertical: 11}}>
+      <IconText
+        iconName="add-circle-outline"
+        text={title}
+        direction="row"
+        disabled={true}
+        color="#F7941D"
+      />
+    </View>
+  );
   const renderCategories = () => {
-    if (!selectedCategory) {
-      return Object.keys(categories).map(category => (
-        <View key={category} style={{marginVertical: 11}}>
-          <IconText
-            color="black"
-            iconName={categories[category].iconName}
-            text={category}
-            direction="row"
-            onPress={() => {
-              setCategory(category);
-            }}
-          />
-        </View>
-      ));
-    }
-    return categories[selectedCategory].subCategories.map(subCategory => (
-      <View key={subCategory.name} style={{marginVertical: 11}}>
+    const result = Object.keys(categories).map(category => (
+      <View key={category} style={{marginVertical: 11}}>
         <IconText
           color="black"
-          iconName={subCategory.iconName}
-          text={subCategory.name}
+          iconName={categories[category].iconName}
+          text={category}
           direction="row"
           onPress={() => {
-            setSubCategory(subCategory.name);
-            onHeaderPress();
+            setCategory(category);
           }}
         />
       </View>
     ));
+    return [...result, renderAddCategories('Danh mục mới')];
+  };
+  const renderSubCategories = () => {
+    const result = categories[selectedCategory].subCategories.map(
+      subCategory => (
+        <View key={subCategory.name} style={{marginVertical: 11}}>
+          <IconText
+            color="black"
+            iconName={subCategory.iconName}
+            text={subCategory.name}
+            direction="row"
+            onPress={() => {
+              setSubCategory(subCategory.name);
+              onHeaderPress();
+            }}
+          />
+        </View>
+      ),
+    );
+    return [...result, renderAddCategories('Danh mục con mới')];
   };
   return (
     <>
@@ -73,7 +89,9 @@ const SelectCategories = () => {
         </TouchableOpacity>
       </Card>
       {!isCollapsed && (
-        <View style={styles.collapsible}>{renderCategories()}</View>
+        <View style={styles.collapsible}>
+          {selectedCategory ? renderSubCategories() : renderCategories()}
+        </View>
       )}
     </>
   );
@@ -100,7 +118,7 @@ const styles = {
     marginBottom: 11,
     paddingBottom: 11,
     // If delete below line, the view above it will be shrinked
-    flex: 0.3,
+    flex: 0.4,
     borderRadius: 5,
   },
 };
