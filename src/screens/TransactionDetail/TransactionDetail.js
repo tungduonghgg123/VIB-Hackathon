@@ -5,7 +5,7 @@ import Contact from '../../components/icons/Contact';
 import Card from '../../components/Card';
 import IconText from '../../components/icons/IconText';
 import SelectCategories from '../../components/SelectCategories';
-
+import VIBButton from '../../components/VIBButton';
 const TransactionDetail = ({route}) => {
   return (
     <SafeAreaView style={styles.container}>
@@ -20,8 +20,8 @@ const TransactionDetail = ({route}) => {
         keyboardShouldPersistTaps="handled">
         <Card style={styles.contactContainer}>
           <Contact
-            realName="VU THI QUYNH HUONG"
-            accountNumber="23102000"
+            realName={route.params.realName}
+            accountNumber={route.params.accountNumber}
             subTitleStyle={styles.contact}
             iconSize={31}
             disabled={true}
@@ -61,6 +61,7 @@ const TransactionDetail = ({route}) => {
           />
         </Card>
       </View>
+      <VIBButton title="tiếp tục" />
     </SafeAreaView>
   );
 };
