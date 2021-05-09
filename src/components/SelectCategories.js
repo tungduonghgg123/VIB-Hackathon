@@ -71,6 +71,7 @@ const styles = {
     backgroundColor: 'white',
     marginHorizontal: 11,
     marginBottom: 11,
+    paddingBottom: 11,
     // If delete below line, the view above it will be shrinked
     flex: 0.3,
     borderRadius: 5,
