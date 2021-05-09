@@ -119,9 +119,33 @@ export const InternalTransferOptions = [
   {name: 'SỐ ĐIỆN THOẠI', disabled: true},
   {name: 'CÁ NHÂN', disabled: true},
 ];
-export const categories = [
-  {name: 'Ăn uống', iconName: 'local-pizza'},
-  {name: 'Phụ kiện', iconName: 'backpack'},
-  {name: 'Xe cộ', iconName: 'two-wheeler'},
-  {name: 'Mua sắm', iconName: 'shopping-cart'},
-];
+export const categories = {
+  'Ăn uống': {
+    iconName: 'local-pizza',
+    subCategories: [
+      {name: 'Ăn uống', iconName: 'local-pizza'},
+      {name: 'Phụ kiện', iconName: 'backpack'},
+    ],
+  },
+  'Phụ kiện': {
+    iconName: 'backpack',
+    subCategories: [
+      {name: 'Ăn uống', iconName: 'local-pizza'},
+      {name: 'Phụ kiện', iconName: 'backpack'},
+    ],
+  },
+  'Xe cộ': {
+    iconName: 'two-wheeler',
+    subCategories: [
+      {name: 'Ăn uống', iconName: 'local-pizza'},
+      {name: 'Phụ kiện', iconName: 'backpack'},
+    ],
+  },
+  'Mua sắm': {
+    iconName: 'shopping-cart',
+    subCategories: [
+      {name: 'Ăn uống', iconName: 'local-pizza'},
+      {name: 'Phụ kiện', iconName: 'backpack'},
+    ],
+  },
+};
