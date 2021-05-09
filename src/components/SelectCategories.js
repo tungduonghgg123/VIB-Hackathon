@@ -1,26 +1,68 @@
 import React, {useState} from 'react';
-import Collapsible from 'react-native-collapsible';
-import {ScrollView, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import IconText from './icons/IconText';
 import Card from './Card';
 import {categories} from '../../fakeData';
-import {Icon} from 'react-native-elements/dist/icons/Icon';
 
 const SelectCategories = () => {
-  const [category, setCategory] = useState(
-    'Chọn Danh mục chi tiêu hoặc Ngân sách được nạp',
-  );
-  const [subCategory, setSubCategory] = useState('');
+  const [selectedCategory, setCategory] = useState('');
+  const [selectedSubCategory, setSubCategory] = useState('');
   const [isCollapsed, setIsCollapsed] = useState(true);
   const onHeaderPress = () => setIsCollapsed(!isCollapsed);
+  const renderCategories = () => {
+    if (!selectedCategory) {
+      return Object.keys(categories).map(category => (
+        <View key={category} style={{marginVertical: 11}}>
+          <IconText
+            color="black"
+            iconName={categories[category].iconName}
+            text={category}
+            direction="row"
+            onPress={() => {
+              setCategory(category);
+            }}
+          />
+        </View>
+      ));
+    }
+    return categories[selectedCategory].subCategories.map(subCategory => (
+      <View key={subCategory.name} style={{marginVertical: 11}}>
+        <IconText
+          color="black"
+          iconName={subCategory.iconName}
+          text={subCategory.name}
+          direction="row"
+          onPress={() => {
+            setSubCategory(subCategory.name);
+            onHeaderPress();
+          }}
+        />
+      </View>
+    ));
+  };
   return (
     <>
       {/* weird behaviour happens when using array style */}
       <Card style={{...styles.container, marginBottom: isCollapsed ? 11 : -7}}>
         <TouchableOpacity onPress={onHeaderPress} style={styles.header}>
-          <Text style={styles.text}>{category}</Text>
-          <View style={{position: 'absolute', right: 10}}>
+          <Text style={styles.text}>
+            {selectedCategory ||
+              'Chọn Danh mục chi tiêu hoặc Ngân sách được nạp'}
+            {selectedSubCategory && ` - ${selectedSubCategory}`}
+          </Text>
+
+          <View style={{position: 'absolute', right: 10, flexDirection: 'row'}}>
+            {selectedSubCategory !== '' && (
+              <IconText
+                iconName="clear"
+                color="black"
+                onPress={() => {
+                  setSubCategory('');
+                  setCategory('');
+                }}
+              />
+            )}
             <IconText
               iconName={isCollapsed ? 'expand-more' : 'expand-less'}
               direction="row"
@@ -31,22 +73,7 @@ const SelectCategories = () => {
         </TouchableOpacity>
       </Card>
       {!isCollapsed && (
-        <View style={styles.collapsible}>
-          {categories.map(_category => (
-            <View key={_category.name} style={{marginVertical: 11}}>
-              <IconText
-                color="black"
-                iconName={_category.iconName}
-                text={_category.name}
-                direction="row"
-                onPress={() => {
-                  setCategory(_category.name);
-                  onHeaderPress();
-                }}
-              />
-            </View>
-          ))}
-        </View>
+        <View style={styles.collapsible}>{renderCategories()}</View>
       )}
     </>
   );
