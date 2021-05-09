@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, Text, View} from 'react-native';
+import {ScrollView, Text, TextInput, View} from 'react-native';
 import VIBButton from '../../components/VIBButton';
 import {SafeAreaView} from 'react-native';
 import FieldValue from '../../components/FieldValue';
@@ -70,6 +70,16 @@ const Confirm = ({route, navigation}) => {
             </RadioButton>
           ))}
         </RadioForm>
+        {value !== -1 && (
+          <View
+            style={{...styles.pleaseConfirmContainer, marginHorizontal: 11}}>
+            <TextInput
+              style={styles.pleaseConfirmText}
+              placeholderTextColor="#979797"
+              placeholder="Đặt tên cho người thụ hưởng theo ý thích (không bắt buộc)"
+            />
+          </View>
+        )}
       </ScrollView>
       <VIBButton
         title="xác nhận"
