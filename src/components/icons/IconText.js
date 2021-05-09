@@ -9,9 +9,11 @@ const IconText = ({
   direction = 'column',
   color = 'white',
   onPress = () => {},
+  disabled = false,
 }) => {
   return (
     <TouchableOpacity
+      disabled={disabled}
       onPress={onPress}
       style={{
         flexDirection: direction,
