@@ -20,8 +20,8 @@ const TransactionDetail = ({route}) => {
         keyboardShouldPersistTaps="handled">
         <Card style={styles.contactContainer}>
           <Contact
-            realName={route.params.realName}
-            accountNumber={route.params.accountNumber}
+            realName={route.params?.realName}
+            accountNumber={route.params?.accountNumber}
             subTitleStyle={styles.contact}
             iconSize={31}
             disabled={true}
