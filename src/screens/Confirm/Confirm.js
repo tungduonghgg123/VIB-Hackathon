@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, Text, TextInput, View} from 'react-native';
+import {
+  Dimensions,
+  Platform,
+  ScrollView,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import VIBButton from '../../components/VIBButton';
 import {SafeAreaView} from 'react-native';
 import FieldValue from '../../components/FieldValue';
@@ -61,7 +68,7 @@ const Confirm = ({route, navigation}) => {
                 onPress={onRadioButtonPress}
                 labelStyle={{
                   fontSize: 14,
-                  width: 350,
+                  width: Dimensions.get('window').width * 0.9,
                   flexWrap: 'wrap',
                   alignItems: 'flex-start',
                 }}
@@ -75,7 +82,7 @@ const Confirm = ({route, navigation}) => {
             style={{
               ...styles.pleaseConfirmContainer,
               marginHorizontal: 11,
-              flex: 0.06,
+              height: 30,
             }}>
             <TextInput
               style={styles.pleaseConfirmText}
@@ -107,9 +114,11 @@ const styles = {
   pleaseConfirmContainer: {
     backgroundColor: '#F2F2F2',
     justifyContent: 'center',
-    flex: 0.05,
+    height: 50,
     paddingLeft: 11,
     borderRadius: 5,
+    flexWrap: 'wrap',
+    alignItems: 'flex-start',
   },
   pleaseConfirmText: {
     fontSize: 12,

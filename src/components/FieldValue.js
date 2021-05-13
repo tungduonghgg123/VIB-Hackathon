@@ -3,7 +3,7 @@ import {Text, View} from 'react-native';
 
 const FieldValue = ({field, value, containerStyle, blueValue = false}) => {
   return (
-    <View style={{flex: 0.06}}>
+    <View style={{height: 40}}>
       <View
         style={{
           flexDirection: 'row',
