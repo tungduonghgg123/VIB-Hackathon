@@ -17,7 +17,7 @@ const Transfer = ({navigation}) => {
         <IconText iconName="account-balance" text="Ngoài VIB" />
         <IconText iconName="assessment" text="Đầu tư" />
       </View>
-      <ScrollView style={{flex: 0.9}}>
+      <ScrollView>
         <View style={styles.searchBarWrapper}>
           <SearchBar
             placeholder="Tìm kiếm người thụ hưởng"
@@ -45,13 +45,13 @@ const styles = {
   },
   transferOptionsContainer: {
     backgroundColor: '#FAA934',
-    flex: 0.1,
+    height: 89,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
   },
   searchBarWrapper: {
-    flex: 0.1,
+    height: 58,
     backgroundColor: 'red',
   },
   searchBarContainer: {
