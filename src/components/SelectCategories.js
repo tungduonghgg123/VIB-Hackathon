@@ -62,7 +62,7 @@ const SelectCategories = ({setFullCategory}) => {
   };
   return (
     <>
-      {/* weird behaviour happens when using array style */}
+      {/*TODO:  weird behaviour happens when using array style */}
       <Card style={{...styles.container, marginBottom: isCollapsed ? 11 : -7}}>
         <TouchableOpacity onPress={onHeaderPress} style={styles.header}>
           <Text style={styles.text}>
@@ -101,7 +101,7 @@ const SelectCategories = ({setFullCategory}) => {
 };
 const styles = {
   container: {
-    flex: 0.08,
+    height: 58,
     justifyContent: 'center',
     paddingTop: 0,
   },

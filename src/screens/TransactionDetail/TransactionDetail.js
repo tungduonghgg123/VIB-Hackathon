@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {ScrollView, View, TextInput, Text} from 'react-native';
 import {SafeAreaView} from 'react-native';
 import Contact from '../../components/icons/Contact';
@@ -12,15 +12,7 @@ const TransactionDetail = ({route, navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View
-        // contentContainerStyle={{
-        //   flexGrow: 1,
-        //   backgroundColor: 'yellow',
-        //   flexShrink: 0,
-        // }}
-        style={{flex: 1}}
-        bounces={false}
-        keyboardShouldPersistTaps="handled">
+      <ScrollView bounces={false} keyboardShouldPersistTaps="handled">
         <Card style={styles.contactContainer}>
           <Contact
             realName={route.params?.realName}
@@ -72,7 +64,7 @@ const TransactionDetail = ({route, navigation}) => {
             placeholder="Ghi chú (không bắt buộc)"
           />
         </Card>
-      </View>
+      </ScrollView>
       <VIBButton
         title="tiếp tục"
         onPress={() =>
@@ -93,17 +85,19 @@ const styles = {
     backgroundColor: '#0066B3',
   },
   contactContainer: {
+    height: 87,
+    justifyContent: 'center',
     paddingLeft: 11,
     paddingTop: 0,
   },
   inputAmountContainer: {
-    flex: 0.08,
+    height: 58,
     paddingLeft: 31,
     paddingTop: 0,
     justifyContent: 'center',
   },
   balanceContainer: {
-    flex: 0.08,
+    height: 58,
     paddingLeft: 31,
     paddingTop: 0,
     flexDirection: 'row',
