@@ -13,8 +13,33 @@ Transfer Dashboard screen|Money Transfer Internally screen | Transaction Detail 
 
 ## Installation 
 Preresquisite: Please make sure you have set up the environment to run a react-native project: [How to set up environment](https://reactnative.dev/docs/environment-setup) 
-1. `yarn install`
-2. `npx pod-install`
-3. `npm start`
-4. `npx react-native run-ios (or run-android)`
+
+1. Clone repository 
+```bash
+git clone https://github.com/tungduonghgg123/VIB-Hackathon
+```
+2. cd into project directory
+```bash
+cd VIB-Hackathon
+```
+3. Install Javascript dependencies (can use `npm` instead)
+```bash
+yarn install
+```
+4.1. Install iOS dependencies
+```
+npx pod-install
+```
+Run iOS 
+```
+npx react-native run-ios
+```
+4.2 Run Android
+```
+npx react-native run-android
+```
+5. Start the server
+``` 
+npm start
+```
 
