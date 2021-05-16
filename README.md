@@ -13,7 +13,7 @@ Transfer Dashboard screen|Money Transfer Internally screen | Transaction Detail 
 
 ## Installation 
 Preresquisite: Please make sure you have set up the environment to run a react-native project: [How to set up environment](https://reactnative.dev/docs/environment-setup) 
-1. `npm install`
+1. `yarn install`
 2. `npx pod-install`
 3. `npm start`
 4. `npx react-native run-ios (or run-android)`
