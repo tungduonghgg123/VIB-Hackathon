@@ -14,6 +14,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Transfer from './src/screens/Transfer/Transfer';
 import InternalTransfer from './src/screens/InternalTransfer/InternalTransfer';
 import TransactionDetail from './src/screens/TransactionDetail/TransactionDetail';
+import Dashboard from './src/screens/Dashboard/Dashboard';
 import Confirm from './src/screens/Confirm/Confirm';
 const Stack = createStackNavigator();
 
@@ -22,7 +23,7 @@ function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Transfer"
+          initialRouteName="Dashboard"
           screenOptions={{
             headerStyle: {
               backgroundColor: '#0066B3',
@@ -39,6 +40,13 @@ function App() {
             component={Transfer}
             options={{
               title: 'Chuyển tiền',
+            }}
+          />
+          <Stack.Screen
+            name="Dashboard"
+            component={Dashboard}
+            options={{
+              headerShown: false,
             }}
           />
           <Stack.Screen
