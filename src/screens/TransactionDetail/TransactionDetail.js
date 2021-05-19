@@ -8,6 +8,7 @@ import SelectCategories from '../../components/SelectCategories';
 import VIBButton from '../../components/VIBButton';
 import InputAmount from '../../components/InputAmount';
 import SimpleTextInput from '../../components/SimpleTextInput';
+import {categories} from '../../../fakeData';
 const TransactionDetail = ({route, navigation}) => {
   const [amount, setAmount] = useState('');
   const [fullCategory, setFullCategory] = useState('');
@@ -36,7 +37,11 @@ const TransactionDetail = ({route, navigation}) => {
           </View>
         </Card>
         <SimpleTextInput placeholder="Nội dung (không bắt buộc)" />
-        <SelectCategories setFullCategory={setFullCategory} />
+        <SelectCategories
+          categories={categories}
+          setFullCategory={setFullCategory}
+          placeholder="Chọn Danh mục chi tiêu hoặc Ngân sách được nạp"
+        />
         <SimpleTextInput placeholder="Ghi chú cho khoản chi tiêu (không bắt buộc)" />
       </ScrollView>
       <VIBButton

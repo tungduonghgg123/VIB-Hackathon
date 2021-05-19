@@ -4,9 +4,13 @@ import {Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import IconText from './icons/IconText';
 import Card from './Card';
-import {categories} from '../../fakeData';
 
-const SelectCategories = ({setFullCategory}) => {
+const SelectCategories = ({
+  setFullCategory,
+  categories,
+  placeholder,
+  shouldChooseSubCategory = true,
+}) => {
   const [selectedCategory, setCategory] = useState('');
   const [selectedSubCategory, setSubCategory] = useState('');
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -35,11 +39,16 @@ const SelectCategories = ({setFullCategory}) => {
           direction="row"
           onPress={() => {
             setCategory(category);
+            if (!shouldChooseSubCategory) {
+              onHeaderPress();
+            }
           }}
         />
       </View>
     ));
-    return [...result, renderAddCategories('Danh mục mới')];
+    return shouldChooseSubCategory
+      ? [...result, renderAddCategories('Danh mục mới')]
+      : result;
   };
   const renderSubCategories = () => {
     const result = categories[selectedCategory].subCategories.map(
@@ -66,13 +75,13 @@ const SelectCategories = ({setFullCategory}) => {
       <Card style={{...styles.container, marginBottom: isCollapsed ? 11 : -7}}>
         <TouchableOpacity onPress={onHeaderPress} style={styles.header}>
           <Text style={styles.text}>
-            {selectedCategory ||
-              'Chọn Danh mục chi tiêu hoặc Ngân sách được nạp'}
+            {selectedCategory || placeholder}
             {selectedSubCategory && ` - ${selectedSubCategory}`}
           </Text>
 
           <View style={{position: 'absolute', right: 10, flexDirection: 'row'}}>
-            {selectedSubCategory !== '' && (
+            {((shouldChooseSubCategory && selectedSubCategory !== '') ||
+              (!shouldChooseSubCategory && selectedCategory !== '')) && (
               <IconText
                 iconName="clear"
                 color="black"
@@ -93,7 +102,9 @@ const SelectCategories = ({setFullCategory}) => {
       </Card>
       {!isCollapsed && (
         <View style={styles.collapsible}>
-          {selectedCategory ? renderSubCategories() : renderCategories()}
+          {shouldChooseSubCategory && selectedCategory
+            ? renderSubCategories()
+            : renderCategories()}
         </View>
       )}
     </>
@@ -120,8 +131,6 @@ const styles = {
     marginHorizontal: 11,
     marginBottom: 11,
     paddingBottom: 11,
-    // If delete below line, the view above it will be shrinked
-    flex: 0.4,
     borderRadius: 5,
   },
 };
