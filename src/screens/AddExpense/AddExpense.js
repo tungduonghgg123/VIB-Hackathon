@@ -1,19 +1,15 @@
-import React, {useEffect, useState} from 'react';
-import {
-  Dimensions,
-  Platform,
-  ScrollView,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
-import VIBButton from '../../components/VIBButton';
+import React, {useState} from 'react';
+import {Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native';
-import FieldValue from '../../components/FieldValue';
 import IconText from '../../components/icons/IconText';
+import InputAmount from '../../components/InputAmount';
+import SimpleTextInput from '../../components/SimpleTextInput';
+import SelectCategories from '../../components/SelectCategories';
+import {categories, moneySource} from '../../../fakeData';
 const AddExpense = ({route, navigation}) => {
-  const {amount, fullCategory, accountNumber, realName} = route.params || {};
-  const [value, setValue] = useState(-1);
+  const [amount, setAmount] = useState('');
+  const [fullCategory, setFullCategory] = useState('');
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.iconWrapper}>
@@ -28,6 +24,19 @@ const AddExpense = ({route, navigation}) => {
         Sử dụng giọng nói để thêm khoản chi tiêu nhanh chóng hơn!
       </Text>
       <Text style={styles.text}>Hoặc nhập tay khoản chi tiêu</Text>
+      <InputAmount amount={amount} setAmount={setAmount} />
+      <SelectCategories
+        categories={categories}
+        setFullCategory={setFullCategory}
+        placeholder="Chọn Danh mục chi tiêu hoặc Ngân sách được nạp"
+      />
+      <SimpleTextInput placeholder="Ghi chú cho khoản chi tiêu (không bắt buộc)" />
+      <SelectCategories
+        categories={moneySource}
+        setFullCategory={setFullCategory}
+        placeholder="Chọn ngân sách của khoản chi tiêu"
+        shouldChooseSubCategory={false}
+      />
     </SafeAreaView>
   );
 };
@@ -53,7 +62,5 @@ const styles = {
     alignSelf: 'center',
     fontStyle: 'italic',
   },
-  input: {fontSize: 14},
-  inputLabel: {fontSize: 12, fontWeight: '400'},
 };
 export default AddExpense;
