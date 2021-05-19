@@ -6,6 +6,7 @@ import Card from '../../components/Card';
 import IconText from '../../components/icons/IconText';
 import SelectCategories from '../../components/SelectCategories';
 import VIBButton from '../../components/VIBButton';
+import InputAmount from '../../components/InputAmount';
 const TransactionDetail = ({route, navigation}) => {
   const [amount, setAmount] = useState('');
   const [fullCategory, setFullCategory] = useState('');
@@ -22,23 +23,7 @@ const TransactionDetail = ({route, navigation}) => {
             disabled={true}
           />
         </Card>
-        <Card style={styles.inputAmountContainer}>
-          <TextInput
-            style={styles.text}
-            placeholderTextColor="#979797"
-            placeholder="Nhập số tiền"
-            keyboardType="numeric"
-            returnKeyType="done"
-            onChangeText={text => {
-              setAmount(
-                text
-                  .replace(/,/g, '')
-                  .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,'),
-              );
-            }}
-            value={amount}
-          />
-        </Card>
+        <InputAmount amount={amount} setAmount={setAmount} />
         <Card style={styles.balanceContainer}>
           <IconText color="black" iconName="account-balance-wallet" />
           <View style={{marginLeft: 26}}>
