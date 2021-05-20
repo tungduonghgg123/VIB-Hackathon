@@ -18,6 +18,7 @@
     "appcenter-crashes": "4.1.0",
     "react": "17.0.1",
     "react-native": "0.64.1",
+    "react-native-audio-record": "^0.2.2",
     "react-native-collapsible": "^1.6.0",
     "react-native-elements": "^3.4.1",
     "react-native-gesture-handler": "^1.10.3",

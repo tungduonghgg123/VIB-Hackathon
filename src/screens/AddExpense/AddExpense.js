@@ -1,23 +1,54 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native';
 import IconText from '../../components/icons/IconText';
 import InputAmount from '../../components/InputAmount';
 import SimpleTextInput from '../../components/SimpleTextInput';
 import SelectCategories from '../../components/SelectCategories';
+import AudioRecord from 'react-native-audio-record';
 import {categories, moneySource} from '../../../fakeData';
+import {LogBox} from 'react-native';
+LogBox.ignoreLogs(['Sending `data` with no listeners registered.']);
+
+const options = {
+  sampleRate: 16000, // default 44100
+  channels: 1, // 1 or 2, default 1
+  bitsPerSample: 16, // 8 or 16, default 16
+  audioSource: 6, // android only (see below)
+  wavFile: 'test.wav', // default 'audio.wav'
+};
 const AddExpense = ({route, navigation}) => {
   const [amount, setAmount] = useState('');
   const [fullCategory, setFullCategory] = useState('');
-
+  const [isRecording, setIsRecording] = useState(false);
+  const [recordFilePath, setRecordFilePath] = useState('');
+  const startRecording = () => {
+    AudioRecord.start();
+    setIsRecording(true);
+  };
+  const stopRecording = async () => {
+    const audioFilePath = await AudioRecord.stop();
+    setRecordFilePath(audioFilePath);
+    setIsRecording(false);
+  };
+  const voiceInputHandler = async () => {
+    if (!isRecording) {
+      startRecording();
+      return;
+    }
+    stopRecording();
+  };
+  useEffect(() => {
+    AudioRecord.init(options);
+  }, []);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.iconWrapper}>
         <IconText
-          iconName="mic"
+          iconName={isRecording ? 'more-horiz' : 'mic'}
           iconSize={77}
           color="#0066B3"
-          onPress={() => console.log('ahihi')}
+          onPress={voiceInputHandler}
         />
       </View>
       <Text style={styles.text}>
