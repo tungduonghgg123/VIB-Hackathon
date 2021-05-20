@@ -16,6 +16,11 @@ import InternalTransfer from './src/screens/InternalTransfer/InternalTransfer';
 import TransactionDetail from './src/screens/TransactionDetail/TransactionDetail';
 import Dashboard from './src/screens/Dashboard/Dashboard';
 import Confirm from './src/screens/Confirm/Confirm';
+import Quizbudget from './src/screens/Quiz/Quiz-budget';
+import Quizfixcost from './src/screens/Quiz/Quiz-fixcost';
+import Quizavecost from './src/screens/Quiz/Quiz-avecost';
+import Quizgoal from './src/screens/Quiz/Quiz-goal';
+
 const Stack = createStackNavigator();
 
 function App() {
@@ -70,6 +75,34 @@ function App() {
               title: 'Xác nhận thông tin',
             }}
           />
+          <Stack.Screen
+            name="Quizbudget"
+            component={Quizbudget}
+            options={{
+              title: 'Tạo ngân sách chi tiêu',
+            }}
+          />
+          <Stack.Screen
+            name="Quizfixcost"
+            component={Quizfixcost}
+            options={{
+              title: 'Tạo ngân sách chi tiêu',
+            }}
+          />
+          <Stack.Screen
+            name="Quizavecost"
+            component={Quizavecost}
+            options={{
+              title: 'Tạo ngân sách chi tiêu',
+            }}
+          />     
+          <Stack.Screen
+            name="Quizgoal"
+            component={Quizgoal}
+            options={{
+              title: 'Tạo ngân sách chi tiêu',
+            }}
+          />          
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
