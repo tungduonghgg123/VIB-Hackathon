@@ -32,7 +32,7 @@ const Dashboard = ({navigation}) => {
             />
             <TouchableOpacity
               style={{flex: 1}}
-              onPress={() => console.log('Thanh Toan QR')}
+              onPress={() => navigation.navigate('Quizbudget')}
             />
           </View>
           <View style={{flex: 1}} />
