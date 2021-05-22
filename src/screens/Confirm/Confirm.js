@@ -21,7 +21,6 @@ var radio_props = [
   ,
 ];
 const Confirm = ({route, navigation}) => {
-  // Nếu như mà không có route.params thì sao?
   const {amount, fullCategory, accountNumber, realName} = route.params || {};
   const [value, setValue] = useState(-1);
   const onRadioButtonPress = newValue => {
@@ -117,8 +116,6 @@ const styles = {
     height: 50,
     paddingLeft: 11,
     borderRadius: 5,
-    flexWrap: 'wrap',
-    alignItems: 'flex-start',
   },
   pleaseConfirmText: {
     fontSize: 12,
