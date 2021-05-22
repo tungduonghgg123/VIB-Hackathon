@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {Text} from 'react-native';
-import {View} from 'react-native';
+import {Text, View, LogBox} from 'react-native';
 import Modal from 'react-native-modal';
 import defaultStyle from '../defaultStyle';
 import IconText from './icons/IconText';
 import AudioRecord from 'react-native-audio-record';
-import {LogBox} from 'react-native';
 const options = {
   sampleRate: 16000, // default 44100
   channels: 1, // 1 or 2, default 1
@@ -16,13 +14,15 @@ const options = {
 LogBox.ignoreLogs(['Sending `data` with no listeners registered.']);
 const RecordModal = ({isVisible, toggleModal, setRecordFilePath}) => {
   const [isRecording, setIsRecording] = useState(false);
+  const [voicePath, setVoicePath] = useState('');
+
   const startRecording = () => {
     AudioRecord.start();
     setIsRecording(true);
   };
   const stopRecording = async () => {
     const audioFilePath = await AudioRecord.stop();
-    setRecordFilePath(audioFilePath);
+    setVoicePath(audioFilePath);
     setIsRecording(false);
   };
   const voiceInputHandler = async () => {
@@ -122,4 +122,5 @@ const styles = {
     fontStyle: 'italic',
   },
 };
+
 export default RecordModal;
