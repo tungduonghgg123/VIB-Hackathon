@@ -26,13 +26,14 @@ RNFetchBlob.fetch(
       name: 'audio',
       filename: 'test.wav',
       type: 'application/wav',
-      // data: RNFetchBlob.wrap(RNFetchBlob.fs.asset('test.wav')),
       data: RNFetchBlob.wrap(audioFilePath),
     },
   ],
 )
   .then(resp => {
-    console.log('success: ', resp);
+    console.log('success: ', resp.data);
+    const result = resp.data;
+    console.log(result);
   })
   .catch(err => {
     console.log('error: ', err);
