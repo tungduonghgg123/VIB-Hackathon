@@ -4,6 +4,33 @@ import Modal from 'react-native-modal';
 import defaultStyle from '../defaultStyle';
 import IconText from './icons/IconText';
 import AudioRecord from 'react-native-audio-record';
+import RNFetchBlob from 'rn-fetch-blob';
+// const audioFilePath =
+//   '/var/mobile/Containers/Data/Application/6DD5CA54-43C0-4721-A877-015C8C542CD9/Documents/test.wav';
+
+const voiceToText = async recordPath => {
+  try {
+    const json = await RNFetchBlob.fetch(
+      'POST',
+      'http://server.etronresearch.work:3939/v1/api/asr',
+      {
+        'Content-Type': 'multipart/form-data',
+      },
+      [
+        {
+          name: 'audio',
+          filename: 'test.wav',
+          type: 'application/wav',
+          data: RNFetchBlob.wrap(recordPath),
+        },
+      ],
+    );
+    return JSON.parse(json.data);
+  } catch (e) {
+    console.log(e);
+    return -1;
+  }
+};
 const options = {
   sampleRate: 16000, // default 44100
   channels: 1, // 1 or 2, default 1
@@ -12,9 +39,11 @@ const options = {
   wavFile: 'test.wav', // default 'audio.wav'
 };
 LogBox.ignoreLogs(['Sending `data` with no listeners registered.']);
-const RecordModal = ({isVisible, toggleModal, setRecordFilePath}) => {
+
+const RecordModal = ({isVisible, toggleModal, setVoiceRecognitionResult}) => {
   const [isRecording, setIsRecording] = useState(false);
   const [voicePath, setVoicePath] = useState('');
+  const [showError, setShowError] = useState(false);
 
   const startRecording = () => {
     AudioRecord.start();
@@ -24,6 +53,16 @@ const RecordModal = ({isVisible, toggleModal, setRecordFilePath}) => {
     const audioFilePath = await AudioRecord.stop();
     setVoicePath(audioFilePath);
     setIsRecording(false);
+    // Voice to text handling
+    const result = await voiceToText(voicePath);
+    if (result === -1) {
+      setShowError(true);
+    } else {
+      setVoiceRecognitionResult(result);
+      console.log(result);
+      // close modal
+      toggleModal();
+    }
   };
   const voiceInputHandler = async () => {
     if (!isRecording) {
@@ -32,6 +71,11 @@ const RecordModal = ({isVisible, toggleModal, setRecordFilePath}) => {
     }
     stopRecording();
   };
+  useEffect(() => {
+    if (showError && isRecording) {
+      setShowError(false);
+    }
+  }, [isRecording, showError]);
   useEffect(() => {
     AudioRecord.init(options);
   }, []);
@@ -96,6 +140,16 @@ const RecordModal = ({isVisible, toggleModal, setRecordFilePath}) => {
         }}>
         Nhấn để bắt đầu ghi âm
       </Text>
+      {showError && (
+        <Text
+          style={{
+            fontSize: 12,
+            color: 'red',
+            marginTop: 13,
+          }}>
+          Đã có lỗi xảy ra, vui lòng thử lại.
+        </Text>
+      )}
     </Modal>
   );
 };

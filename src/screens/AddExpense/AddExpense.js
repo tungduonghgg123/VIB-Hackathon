@@ -7,43 +7,12 @@ import SimpleTextInput from '../../components/SimpleTextInput';
 import SelectCategories from '../../components/SelectCategories';
 import {categories, moneySource} from '../../../fakeData';
 import RecordModal from '../../components/RecordModal';
-import RNFetchBlob from 'rn-fetch-blob';
-const audioFilePath =
-  'var/mobile/Containers/Data/Application/6DD5CA54-43C0-4721-A877-015C8C542CD9/Documents/test.wav';
-RNFetchBlob.fs.readFile(audioFilePath, 'base64').then(r => {
-  console.log(r);
-});
-// console.log(RNFetchBlob.fs.asset('test.wav'));
-RNFetchBlob.fetch(
-  'POST',
-  'http://server.etronresearch.work:3939/v1/api/asr',
-  {
-    'Content-Type': 'multipart/form-data',
-  },
-  [
-    // custom content type
-    {
-      name: 'audio',
-      filename: 'test.wav',
-      type: 'application/wav',
-      data: RNFetchBlob.wrap(audioFilePath),
-    },
-  ],
-)
-  .then(resp => {
-    console.log('success: ', resp.data);
-    const result = resp.data;
-    console.log(result);
-  })
-  .catch(err => {
-    console.log('error: ', err);
-  });
-
 const AddExpense = ({route, navigation}) => {
   const [amount, setAmount] = useState('');
   const [fullCategory, setFullCategory] = useState('');
   const [recordFilePath, setRecordFilePath] = useState('');
-  const [showVoiceRecordingModal, setShowVoiceRecordingModal] = useState(true);
+  const [showVoiceRecordingModal, setShowVoiceRecordingModal] = useState(false);
+  const [voiceRecognitionResult, setVoiceRecognitionResult] = useState('');
 
   return (
     <SafeAreaView style={styles.container}>
@@ -59,6 +28,7 @@ const AddExpense = ({route, navigation}) => {
         isVisible={showVoiceRecordingModal}
         toggleModal={() => setShowVoiceRecordingModal(!showVoiceRecordingModal)}
         setRecordFilePath={setRecordFilePath}
+        setVoiceRecognitionResult={setVoiceRecognitionResult}
       />
       <Text style={styles.text}>
         Sử dụng giọng nói để thêm khoản chi tiêu nhanh chóng hơn!
