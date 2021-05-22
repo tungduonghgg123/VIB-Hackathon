@@ -7,6 +7,36 @@ import SimpleTextInput from '../../components/SimpleTextInput';
 import SelectCategories from '../../components/SelectCategories';
 import {categories, moneySource} from '../../../fakeData';
 import RecordModal from '../../components/RecordModal';
+import RNFetchBlob from 'rn-fetch-blob';
+const audioFilePath =
+  'var/mobile/Containers/Data/Application/6DD5CA54-43C0-4721-A877-015C8C542CD9/Documents/test.wav';
+RNFetchBlob.fs.readFile(audioFilePath, 'base64').then(r => {
+  console.log(r);
+});
+// console.log(RNFetchBlob.fs.asset('test.wav'));
+RNFetchBlob.fetch(
+  'POST',
+  'http://server.etronresearch.work:3939/v1/api/asr',
+  {
+    'Content-Type': 'multipart/form-data',
+  },
+  [
+    // custom content type
+    {
+      name: 'audio',
+      filename: 'test.wav',
+      type: 'application/wav',
+      // data: RNFetchBlob.wrap(RNFetchBlob.fs.asset('test.wav')),
+      data: RNFetchBlob.wrap(audioFilePath),
+    },
+  ],
+)
+  .then(resp => {
+    console.log('success: ', resp);
+  })
+  .catch(err => {
+    console.log('error: ', err);
+  });
 
 const AddExpense = ({route, navigation}) => {
   const [amount, setAmount] = useState('');
