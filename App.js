@@ -94,7 +94,7 @@ function App() {
               ),
             }}
           />
-          <Stack.screen
+          <Stack.Screen
             name="Quizbudget"
             component={Quizbudget}
             options={{
@@ -114,14 +114,14 @@ function App() {
             options={{
               title: 'Tạo ngân sách chi tiêu',
             }}
-          />     
+          />
           <Stack.Screen
             name="Quizgoal"
             component={Quizgoal}
             options={{
               title: 'Tạo ngân sách chi tiêu',
             }}
-          />          
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
