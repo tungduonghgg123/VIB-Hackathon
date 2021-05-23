@@ -51,7 +51,7 @@ const Quizgoal = ({ route, navigation }) => {
       </ScrollView>
       <VIBButton
         title="tiếp tục"
-        onPress={() => navigation.navigate("Confirm")}
+        onPress={() => navigation.navigate("Overview")}
       />
     </SafeAreaView>
   );

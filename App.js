@@ -20,6 +20,10 @@ import Quizbudget from './src/screens/Quiz/Quiz-budget';
 import Quizfixcost from './src/screens/Quiz/Quiz-fixcost';
 import Quizavecost from './src/screens/Quiz/Quiz-avecost';
 import Quizgoal from './src/screens/Quiz/Quiz-goal';
+import Overview from './src/screens/BudgetPlan/Overview';
+import FixBudget from './src/screens/BudgetPlan/FixBudget';
+import NonFixBudget from './src/screens/BudgetPlan/NonFixBudget';
+import SpendingTracker from './src/screens/BudgetPlan/SpendingTracker';
 
 const Stack = createStackNavigator();
 
@@ -102,7 +106,36 @@ function App() {
             options={{
               title: 'Tạo ngân sách chi tiêu',
             }}
+          />     
+          <Stack.Screen
+            name="Overview"
+            component={Overview}
+            options={{
+              title: 'Quản lý tài chính',
+            }}
+          />
+          <Stack.Screen
+            name="FixBudget"
+            component={FixBudget}
+            options={{
+              title: 'Chi tiêu cố định',
+            }}
+          />     
+          <Stack.Screen
+            name="NonFixBudget"
+            component={NonFixBudget}
+            options={{
+              title: 'Kế hoạch chi tiêu',
+            }}
+          />
+          <Stack.Screen
+            name="SpendingTracker"
+            component={SpendingTracker}
+            options={{
+              title: 'Sổ chi tiêu',
+            }}
           />          
+          
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
