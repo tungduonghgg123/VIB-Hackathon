@@ -4,11 +4,11 @@ import {SafeAreaView} from 'react-native';
 import VIBButton from '../../components/VIBButton';
 import * as Progress from 'react-native-progress';
 
-const Quizbudget = ({route, navigation, onPressNext}) => {
-  const [vibBudget, setVibBudget] = useState('');
-  const [otherBankBudget, setOtherBankBudget] = useState('');
-  const [cashBudget, setCashBudget] = useState('');
-  const [eWalletBudget, setEWalletBudget] = useState('');
+const Quizbudget = ({setData, data, onPressNext}) => {
+  const [vibBudget, setVibBudget] = useState(data.vibBudget);
+  const [otherBankBudget, setOtherBankBudget] = useState(data.otherBankBudget);
+  const [cashBudget, setCashBudget] = useState(data.cashBudget);
+  const [eWalletBudget, setEWalletBudget] = useState(data.eWalletBudget);
   return (
     <SafeAreaView style={styles.container}>
       <Progress.Bar
@@ -80,7 +80,19 @@ const Quizbudget = ({route, navigation, onPressNext}) => {
           </View>
         </View>
       </ScrollView>
-      <VIBButton title="tiếp tục" onPress={onPressNext} />
+      <VIBButton
+        title="tiếp tục"
+        onPress={() => {
+          onPressNext();
+          setData({
+            ...data,
+            vibBudget,
+            cashBudget,
+            otherBankBudget,
+            eWalletBudget,
+          });
+        }}
+      />
     </SafeAreaView>
   );
 };

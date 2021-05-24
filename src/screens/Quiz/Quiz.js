@@ -8,6 +8,15 @@ import {HeaderBackButton} from '@react-navigation/stack';
 
 const Quiz = ({navigation}) => {
   const [step, setStep] = useState(0);
+  const [data, setData] = useState({
+    vibBudget: '',
+    otherBankBudget: '',
+    cashBudget: '',
+    eWalletBudget: '',
+    monthlyExpense: [],
+    limitExpense: [],
+  });
+
   const onPressNext = () => setStep(step + 1);
   const onPressBack = () => setStep(step - 1);
   navigation.setOptions({
@@ -28,12 +37,19 @@ const Quiz = ({navigation}) => {
       />
     ),
   });
+  console.log(data);
   return (
     <View style={{flex: 1}}>
-      {step === 0 && <Quizbudget onPressNext={onPressNext} />}
-      {step === 1 && <QuizFixCost onPressNext={onPressNext} />}
-      {step === 2 && <Quizavecost onPressNext={onPressNext} />}
-      {step === 3 && <Quizgoal />}
+      {step === 0 && (
+        <Quizbudget onPressNext={onPressNext} data={data} setData={setData} />
+      )}
+      {step === 1 && (
+        <QuizFixCost data={data} onPressNext={onPressNext} setData={setData} />
+      )}
+      {step === 2 && (
+        <Quizavecost data={data} onPressNext={onPressNext} setData={setData} />
+      )}
+      {step === 3 && <Quizgoal data={data} setData={setData} />}
     </View>
   );
 };
