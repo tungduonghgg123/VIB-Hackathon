@@ -1,10 +1,60 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ScrollView, View, Text, Image, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native';
 import {Icon} from 'react-native-elements';
 import * as Progress from 'react-native-progress';
-
+import {useQuery} from '@apollo/client';
+import {QUERY_QUIZ} from '../../model/query';
+import {formatMoney} from '../../helper';
+const moneyLeftReducer = (left, currentExpense) =>
+  left + currentExpense.maxAmount - currentExpense.currentAmount;
+const extractRemainingPercantage = expense => {
+  let total = 0;
+  let used = 0;
+  expense.forEach(e => {
+    total += e.maxAmount;
+    used += e.currentAmount;
+  });
+  console.log(total, used);
+  return used / total;
+};
 const Overview = ({route, navigation}) => {
+  const {loading, error, data} = useQuery(QUERY_QUIZ);
+  const [derivedInformation, setDerivedInformation] = useState({});
+  const {
+    remainingBudget = 0,
+    budgetLeftInPercentage = 1,
+    limitExpenseCount,
+    monthlyExpenseCount,
+    monthlyExpenseLeftInPercentage,
+    limitExpenseLeftInPercentage,
+  } = derivedInformation;
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+    console.log(data);
+    const {
+      limitExpense,
+      monthlyExpense,
+      monthlyTotalBudget,
+      cash,
+      ewallet,
+      out,
+      vib,
+    } = data.user.quizs[0];
+    setDerivedInformation({
+      remainingBudget: cash + ewallet + out + vib,
+      budgetLeftInPercentage: (cash + ewallet + out + vib) / monthlyTotalBudget,
+      limitExpenseCount: limitExpense.length,
+      monthlyExpenseCount: monthlyExpense.length,
+      monthlyExpenseLeftInPercentage: extractRemainingPercantage(
+        monthlyExpense,
+      ),
+      limitExpenseLeftInPercentage: extractRemainingPercantage(limitExpense),
+    });
+  }, [data]);
+  console.log(limitExpenseLeftInPercentage);
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.transferContainer}>
@@ -23,8 +73,10 @@ const Overview = ({route, navigation}) => {
             </View>
             <View style={styles.containerContent}>
               <View>
-                <Text style={styles.textContent}> Ngân sách hiện tại </Text>
-                <Text style={styles.textMoney}> 4.000.000 VNĐ</Text>
+                <Text style={styles.textContent}>Ngân sách hiện tại </Text>
+                <Text style={styles.textMoney}>
+                  {formatMoney(remainingBudget)} VNĐ
+                </Text>
               </View>
               <Image
                 style={styles.image}
@@ -32,10 +84,14 @@ const Overview = ({route, navigation}) => {
               />
             </View>
             <View style={styles.progressBar}>
-              <Progress.Bar progress={0.5} width={300} color="#FAA934" />
+              <Progress.Bar
+                progress={budgetLeftInPercentage}
+                width={300}
+                color="#FAA934"
+              />
               <Text style={styles.textReminder}>
-                {' '}
-                Bạn còn 50% ngân sách tháng này{' '}
+                Bạn còn {Math.floor(budgetLeftInPercentage * 100)}% ngân sách
+                tháng này{' '}
               </Text>
             </View>
           </TouchableOpacity>
@@ -54,8 +110,10 @@ const Overview = ({route, navigation}) => {
             </View>
             <View style={styles.containerContent}>
               <View>
-                <Text style={styles.textContent}> Tháng này bạn cần trả </Text>
-                <Text style={styles.textMoney}> 2 chi tiêu cố định </Text>
+                <Text style={styles.textContent}>Tháng này bạn cần trả </Text>
+                <Text style={styles.textMoney}>
+                  {monthlyExpenseCount} chi tiêu cố định
+                </Text>
               </View>
               <Image
                 style={styles.imageBig}
@@ -63,11 +121,15 @@ const Overview = ({route, navigation}) => {
               />
             </View>
             <View style={styles.progressBar}>
-              <Progress.Bar progress={1} width={300} color="#FAA934" />
-              <Text style={styles.textReminder}>
-                {' '}
-                Tháng này bạn đã trả hết các chi tiêu cố định rồi!{' '}
-              </Text>
+              <Progress.Bar
+                progress={monthlyExpenseLeftInPercentage}
+                width={300}
+                color="#FAA934"
+              />
+              {/* TODO: Add a meaningful text on this */}
+              {/* <Text style={styles.textReminder}>
+                Tháng này bạn đã trả hết các chi tiêu cố định rồi!
+              </Text> */}
             </View>
           </TouchableOpacity>
 
@@ -100,11 +162,16 @@ const Overview = ({route, navigation}) => {
               </View>
             </View>
             <View style={styles.progressBar}>
-              <Progress.Bar progress={0.7} width={300} color="#FAA934" />
-              <Text style={[styles.textReminder, {color: 'red'}]}>
-                {' '}
-                Bạn cẩn thận không tiêu quá ngân sách tháng này nhé!{' '}
-              </Text>
+              <Progress.Bar
+                progress={limitExpenseLeftInPercentage}
+                width={300}
+                color="#FAA934"
+              />
+              {limitExpenseLeftInPercentage > 0.7 && (
+                <Text style={[styles.textReminder, {color: 'red'}]}>
+                  Bạn cẩn thận không tiêu quá ngân sách tháng này nhé!{' '}
+                </Text>
+              )}
             </View>
           </TouchableOpacity>
 

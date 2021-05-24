@@ -38,12 +38,31 @@ const SUMMIT_QUIZ = gql`
     }
   }
 `;
-const QUERY_USER = gql`
+const QUERY_QUIZ = gql`
   query GetRates {
     user {
-      id
-      realName
+      quizs {
+        cash: monthlyBudget(input: CASH)
+        vib: monthlyBudget(input: VIB)
+        out: monthlyBudget(input: OTHER_BANK)
+        ewallet: monthlyBudget(input: E_WALLET)
+        monthlyTotalBudget
+        monthlyExpense {
+          category {
+            name
+          }
+          maxAmount
+          currentAmount
+        }
+        limitExpense {
+          category {
+            name
+          }
+          maxAmount
+          currentAmount
+        }
+      }
     }
   }
 `;
-export {SUMMIT_QUIZ, REGISTER_USER, QUERY_USER};
+export {SUMMIT_QUIZ, REGISTER_USER, QUERY_QUIZ};
