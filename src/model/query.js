@@ -82,4 +82,32 @@ const QUERY_MONTHLY_EXPENSE = gql`
     }
   }
 `;
-export {QUERY_MONTHLY_EXPENSE, SUMMIT_QUIZ, REGISTER_USER, QUERY_QUIZ};
+const QUERY_SPENDING_TRACKER = gql`
+  {
+    user {
+      transactions {
+        category {
+          name
+          iconName
+        }
+        amount
+        date
+        message
+      }
+      quizs {
+        cash: monthlyBudget(input: CASH)
+        vib: monthlyBudget(input: VIB)
+        out: monthlyBudget(input: OTHER_BANK)
+        ewallet: monthlyBudget(input: E_WALLET)
+        monthlyTotalBudget
+      }
+    }
+  }
+`;
+export {
+  QUERY_MONTHLY_EXPENSE,
+  SUMMIT_QUIZ,
+  REGISTER_USER,
+  QUERY_QUIZ,
+  QUERY_SPENDING_TRACKER,
+};

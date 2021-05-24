@@ -27,12 +27,17 @@ const authLink = setContext(async (_, {headers}) => {
   return {
     headers: {
       ...headers,
-      userid: '60ab85e2b9d9fec9a1617d00',
+      userid: '60abce2db9d9fec9a1617d47',
     },
   };
 });
 const client = new ApolloClient({
   link: authLink.concat(errorLink).concat(httpLink),
   cache: new InMemoryCache(),
+  defaultOptions: {
+    query: {
+      fetchPolicy: 'no-cache',
+    },
+  },
 });
 export default client;

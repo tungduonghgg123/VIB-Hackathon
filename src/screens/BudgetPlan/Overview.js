@@ -15,7 +15,6 @@ const extractRemainingPercantage = expense => {
     total += e.maxAmount;
     used += e.currentAmount;
   });
-  console.log(total, used);
   return used / total;
 };
 const Overview = ({route, navigation}) => {
@@ -56,7 +55,6 @@ const Overview = ({route, navigation}) => {
       limitExpenseLeftInPercentage: extractRemainingPercantage(limitExpense),
     });
   }, [data]);
-  console.log(loading, error, data);
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.transferContainer}>
