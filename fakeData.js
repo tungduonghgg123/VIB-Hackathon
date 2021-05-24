@@ -136,3 +136,14 @@ export const categories = {
     ],
   },
 };
+export const moneySource = {
+  'Ngân sách tiền mặt': {
+    iconName: 'money',
+  },
+  'Ngân sách từ các nguồn ngoài VIB': {
+    iconName: 'payments',
+  },
+  'Ngân sách ví điện tử': {
+    iconName: 'credit-card',
+  },
+};

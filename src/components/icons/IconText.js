@@ -6,6 +6,7 @@ const IconText = ({
   iconName,
   iconSize = 20,
   text,
+  textStyle = {},
   direction = 'column',
   color = 'white',
   onPress = () => {},
@@ -21,7 +22,12 @@ const IconText = ({
       }}>
       <Icon name={iconName} type="material" color={color} size={iconSize} />
       {text && (
-        <Text style={{color, paddingLeft: direction === 'row' ? 9 : 0}}>
+        <Text
+          style={{
+            color,
+            ...textStyle,
+            paddingLeft: direction === 'row' ? 9 : 0,
+          }}>
           {text}
         </Text>
       )}

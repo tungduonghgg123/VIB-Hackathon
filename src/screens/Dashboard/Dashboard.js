@@ -41,6 +41,9 @@ const Dashboard = ({ navigation }) => {
           }}
         >
           <View style={{ flex: 1, flexDirection: "row" }}>
+
+         
+
             <TouchableOpacity
               style={{ flex: 1 }}
               onPress={() => console.log("Tai khoan")}
