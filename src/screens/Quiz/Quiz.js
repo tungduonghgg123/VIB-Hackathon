@@ -5,7 +5,10 @@ import QuizFixCost from './Quiz-fixcost';
 import Quizavecost from './Quiz-avecost';
 import Quizgoal from './Quiz-goal';
 import {HeaderBackButton} from '@react-navigation/stack';
-import {monthyExpenseCategories} from '../../../fakeData';
+import {
+  limitExpenseCategories,
+  monthyExpenseCategories,
+} from '../../../fakeData';
 class Category {
   constructor(
     {name, iconName, subCategoryName, subCategoryIconName, subCategories},
@@ -46,7 +49,16 @@ const Quiz = ({navigation}) => {
           maxAmount: 0,
         }),
     ),
-    limitExpense: [],
+    limitExpense: limitExpenseCategories.map(
+      category =>
+        new Expense({
+          category: new Category({
+            name: category.name,
+            iconName: category.iconName,
+          }),
+          maxAmount: 0,
+        }),
+    ),
   });
 
   const onPressNext = () => setStep(step + 1);

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ScrollView, View, TextInput, Text} from 'react-native';
 import {SafeAreaView} from 'react-native';
 import VIBButton from '../../components/VIBButton';
@@ -6,7 +6,14 @@ import IconText from '../../components/icons/IconText';
 import {Button} from 'react-native-elements/dist/buttons/Button';
 import * as Progress from 'react-native-progress';
 
-const Quizavecost = ({route, navigation, onPressNext}) => {
+const Quizavecost = ({data, setData, onPressNext}) => {
+  const [limitExpense, setLimitExpense] = useState(data.limitExpense);
+  useEffect(() => {
+    setData({
+      ...data,
+      limitExpense,
+    });
+  }, [limitExpense]);
   return (
     <SafeAreaView style={styles.container}>
       <Progress.Bar
@@ -18,81 +25,40 @@ const Quizavecost = ({route, navigation, onPressNext}) => {
       <ScrollView contentContainerStyle={styles.transferContainer}>
         <Text style={styles.heading}>
           Trong tháng tới bạn muốn đặt giới hạn cho những khoản chi tiêu không
-          cố định nào?{' '}
+          cố định nào?
         </Text>
         <View style={styles.root}>
-          <View style={styles.rowContainer}>
-            <Text style={styles.text}>
-              <IconText
-                iconName="restaurant"
-                text="Ăn uống"
-                color="black"
-                direction="row"
-              />
-            </Text>
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.textInput}
-                placeholder="0"
-                placeholderTextColor="white"
-              />
-              <Text style={{color: 'white'}}>VND</Text>
+          {limitExpense.map((expense, index) => (
+            <View key={expense.category.name} style={styles.rowContainer}>
+              <Text style={styles.text}>
+                <IconText
+                  iconName={expense.category.iconName}
+                  text={expense.category.name}
+                  color="black"
+                  direction="row"
+                />
+              </Text>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  keyboardType="numeric"
+                  value={expense.maxAmount.toString()}
+                  onChangeText={value => {
+                    const newMonthly = [...limitExpense];
+                    newMonthly[index] = {
+                      ...expense,
+                      maxAmount: parseInt(value),
+                    };
+                    setLimitExpense(newMonthly);
+                  }}
+                  style={styles.textInput}
+                  placeholder="0"
+                  placeholderTextColor="white"
+                />
+                <Text style={{color: 'white'}}>VND</Text>
+              </View>
             </View>
-          </View>
-          <View style={styles.rowContainer}>
-            <Text style={styles.text}>
-              <IconText
-                iconName="shopping-cart"
-                text="Mua sắm"
-                color="black"
-                direction="row"
-              />
-            </Text>
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.textInput}
-                placeholder="0"
-                placeholderTextColor="white"
-              />
-              <Text style={{color: 'white'}}>VND</Text>
-            </View>
-          </View>
-          <View style={styles.rowContainer}>
-            <Text style={styles.text}>
-              <IconText
-                iconName="local-convenience-store"
-                text="Đi chợ"
-                color="black"
-                direction="row"
-              />
-            </Text>
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.textInput}
-                placeholder="0"
-                placeholderTextColor="white"
-              />
-              <Text style={{color: 'white'}}>VND</Text>
-            </View>
-          </View>
-          <View style={styles.rowContainer}>
-            <Text style={styles.text}>
-              <IconText
-                iconName="nightlife"
-                text="Đi chơi"
-                color="black"
-                direction="row"
-              />
-            </Text>
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.textInput}
-                placeholder="0"
-                placeholderTextColor="white"
-              />
-              <Text style={{color: 'white'}}>VND</Text>
-            </View>
-          </View>
+          ))}
+
           <View style={styles.addButtonBox}>
             <Button
               style={styles.addButton}

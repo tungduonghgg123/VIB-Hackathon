@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ScrollView, View, TextInput, Text} from 'react-native';
 import {SafeAreaView} from 'react-native';
 import VIBButton from '../../components/VIBButton';
@@ -8,7 +8,12 @@ import * as Progress from 'react-native-progress';
 
 const Quizfixcost = ({setData, data, onPressNext}) => {
   const [monthlyExpense, setMonthlyExpense] = useState(data.monthlyExpense);
-
+  useEffect(() => {
+    setData({
+      ...data,
+      monthlyExpense,
+    });
+  }, [monthlyExpense]);
   return (
     <SafeAreaView style={styles.container}>
       <Progress.Bar
@@ -23,7 +28,7 @@ const Quizfixcost = ({setData, data, onPressNext}) => {
         </Text>
         <View style={styles.root}>
           {monthlyExpense.map((expense, index) => (
-            <View key={Math.random()} style={styles.rowContainer}>
+            <View key={expense.category.name} style={styles.rowContainer}>
               <Text style={styles.text}>
                 <IconText
                   iconName={expense.category.iconName}
@@ -34,6 +39,7 @@ const Quizfixcost = ({setData, data, onPressNext}) => {
               </Text>
               <View style={styles.inputContainer}>
                 <TextInput
+                  keyboardType="numeric"
                   value={expense.maxAmount.toString()}
                   onChangeText={value => {
                     const newMonthly = [...monthlyExpense];
@@ -62,16 +68,7 @@ const Quizfixcost = ({setData, data, onPressNext}) => {
           </View>
         </View>
       </ScrollView>
-      <VIBButton
-        title="tiếp tục"
-        onPress={() => {
-          onPressNext();
-          setData({
-            ...data,
-            monthlyExpense,
-          });
-        }}
-      />
+      <VIBButton title="tiếp tục" onPress={onPressNext} />
     </SafeAreaView>
   );
 };

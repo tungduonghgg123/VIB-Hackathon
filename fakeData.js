@@ -163,15 +163,19 @@ export const monthyExpenseCategories = [
 ];
 export const limitExpenseCategories = [
   {
-    name: 'Tiền thuê nhà',
-    iconName: 'home',
+    name: 'Ăn uống',
+    iconName: 'restaurant',
   },
   {
-    name: 'Tiền subscription',
-    iconName: 'movie',
+    name: 'Mua sắm',
+    iconName: 'shopping-cart',
   },
   {
-    name: 'Tiền học phí',
-    iconName: 'school',
+    name: 'Đi chợ',
+    iconName: 'local-convenience-store',
+  },
+  {
+    name: 'Đi chơi',
+    iconName: 'nightlife',
   },
 ];
