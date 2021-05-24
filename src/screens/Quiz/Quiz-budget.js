@@ -29,7 +29,7 @@ const Quizbudget = ({setData, data, onPressNext}) => {
                 keyboardType="numeric"
                 style={styles.textInput}
                 placeholder="0"
-                value={vibBudget}
+                value={vibBudget.toString()}
                 onChangeText={setVibBudget}
                 placeholderTextColor="white"
               />
@@ -41,7 +41,7 @@ const Quizbudget = ({setData, data, onPressNext}) => {
             <View style={styles.inputContainer}>
               <TextInput
                 keyboardType="numeric"
-                value={cashBudget}
+                value={cashBudget.toString()}
                 onChangeText={setCashBudget}
                 style={styles.textInput}
                 placeholder="0"
@@ -55,7 +55,7 @@ const Quizbudget = ({setData, data, onPressNext}) => {
             <View style={styles.inputContainer}>
               <TextInput
                 keyboardType="numeric"
-                value={otherBankBudget}
+                value={otherBankBudget.toString()}
                 onChangeText={setOtherBankBudget}
                 style={styles.textInput}
                 placeholder="0"
@@ -69,7 +69,7 @@ const Quizbudget = ({setData, data, onPressNext}) => {
             <View style={styles.inputContainer}>
               <TextInput
                 keyboardType="numeric"
-                value={eWalletBudget}
+                value={eWalletBudget.toString()}
                 onChangeText={setEWalletBudget}
                 style={styles.textInput}
                 placeholder="0"
@@ -86,10 +86,10 @@ const Quizbudget = ({setData, data, onPressNext}) => {
           onPressNext();
           setData({
             ...data,
-            vibBudget,
-            cashBudget,
-            otherBankBudget,
-            eWalletBudget,
+            vibBudget: parseInt(vibBudget),
+            cashBudget: parseInt(cashBudget),
+            otherBankBudget: parseInt(otherBankBudget),
+            eWalletBudget: parseInt(eWalletBudget),
           });
         }}
       />

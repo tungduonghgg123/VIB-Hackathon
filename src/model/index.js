@@ -2,11 +2,24 @@ import {ApolloClient, InMemoryCache} from '@apollo/client';
 import {createHttpLink} from '@apollo/client';
 import {setContext} from '@apollo/client/link/context';
 import {getData} from '../helper/asyncStorage';
+import {onError} from '@apollo/client/link/error';
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000/graphql',
 });
-
+// Log any GraphQL errors or network error that occurred
+const errorLink = onError(({graphQLErrors, networkError}) => {
+  if (graphQLErrors) {
+    graphQLErrors.map(({message, locations, path}) =>
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+      ),
+    );
+  }
+  if (networkError) {
+    console.log(`[Network error]: ${networkError}`);
+  }
+});
 const authLink = setContext(async (_, {headers}) => {
   // get the authentication token from local storage if it exists
   const userid = await getData('userid');
@@ -14,12 +27,12 @@ const authLink = setContext(async (_, {headers}) => {
   return {
     headers: {
       ...headers,
-      userid,
+      userid: '60ab85e2b9d9fec9a1617d00',
     },
   };
 });
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: authLink.concat(errorLink).concat(httpLink),
   cache: new InMemoryCache(),
 });
 export default client;

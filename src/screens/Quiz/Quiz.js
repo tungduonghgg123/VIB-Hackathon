@@ -9,32 +9,24 @@ import {
   limitExpenseCategories,
   monthyExpenseCategories,
 } from '../../../fakeData';
+import {SUMMIT_QUIZ} from '../../model/query';
+import {useMutation} from '@apollo/client';
 class Category {
-  constructor(
-    {name, iconName, subCategoryName, subCategoryIconName, subCategories},
-    receiver,
-  ) {
+  constructor({name, iconName}) {
     this.name = name;
     this.iconName = iconName;
-    this.subCategories = subCategories || [
-      {
-        name: subCategoryName,
-        iconName: subCategoryIconName,
-        contacts: receiver ? [receiver] : [],
-      },
-    ];
   }
 }
 class Expense {
-  constructor({category, maxAmount, currentAmount}) {
+  constructor({category, maxAmount}) {
     this.category = new Category(category);
     this.maxAmount = maxAmount;
-    this.currentAmount = currentAmount || 0;
   }
 }
 const Quiz = ({navigation}) => {
+  const [registerUser] = useMutation(SUMMIT_QUIZ);
   const [step, setStep] = useState(0);
-  const [data, setData] = useState({
+  const [quiz, setQuiz] = useState({
     vibBudget: '',
     otherBankBudget: '',
     cashBudget: '',
@@ -81,19 +73,31 @@ const Quiz = ({navigation}) => {
       />
     ),
   });
-  console.log(data);
+
   return (
     <View style={{flex: 1}}>
       {step === 0 && (
-        <Quizbudget onPressNext={onPressNext} data={data} setData={setData} />
+        <Quizbudget onPressNext={onPressNext} data={quiz} setData={setQuiz} />
       )}
       {step === 1 && (
-        <QuizFixCost data={data} onPressNext={onPressNext} setData={setData} />
+        <QuizFixCost data={quiz} onPressNext={onPressNext} setData={setQuiz} />
       )}
       {step === 2 && (
-        <Quizavecost data={data} onPressNext={onPressNext} setData={setData} />
+        <Quizavecost data={quiz} onPressNext={onPressNext} setData={setQuiz} />
       )}
-      {step === 3 && <Quizgoal data={data} setData={setData} />}
+      {step === 3 && (
+        <Quizgoal
+          data={quiz}
+          onPressNext={() => {
+            registerUser({
+              variables: {
+                input: quiz,
+              },
+            });
+          }}
+          setData={setQuiz}
+        />
+      )}
     </View>
   );
 };
