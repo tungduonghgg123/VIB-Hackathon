@@ -24,16 +24,18 @@ const Overview = ({route, navigation}) => {
   const {
     remainingBudget = 0,
     budgetLeftInPercentage = 1,
-    limitExpenseCount,
-    monthlyExpenseCount,
-    monthlyExpenseLeftInPercentage,
-    limitExpenseLeftInPercentage,
+    limitExpenseCount = 0,
+    monthlyExpenseCount = 0,
+    monthlyExpenseLeftInPercentage = 0,
+    limitExpenseLeftInPercentage = 0,
   } = derivedInformation;
   useEffect(() => {
     if (!data) {
       return;
     }
-    console.log(data);
+    if (!data.user.quizs?.[0]) {
+      return;
+    }
     const {
       limitExpense,
       monthlyExpense,
@@ -54,7 +56,7 @@ const Overview = ({route, navigation}) => {
       limitExpenseLeftInPercentage: extractRemainingPercantage(limitExpense),
     });
   }, [data]);
-  console.log(limitExpenseLeftInPercentage);
+  console.log(loading, error, data);
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.transferContainer}>
@@ -157,7 +159,7 @@ const Overview = ({route, navigation}) => {
                 </Text>
                 <Text style={[styles.textMoney, {textAlign: 'right'}]}>
                   {' '}
-                  2 kế hoạch chi tiêu{' '}
+                  {limitExpenseCount} kế hoạch chi tiêu{' '}
                 </Text>
               </View>
             </View>

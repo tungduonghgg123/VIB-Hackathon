@@ -55,7 +55,6 @@ const Quizgoal = ({onPressNext}) => {
         title="tiếp tục"
         onPress={() => {
           onPressNext();
-          navigation.navigate('Overview');
         }}
       />
     </SafeAreaView>

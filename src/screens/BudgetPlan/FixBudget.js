@@ -7,8 +7,12 @@ import IconText from '../../components/icons/IconText';
 import CheckBox from '@react-native-community/checkbox';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {Button} from 'react-native-elements/dist/buttons/Button';
-
+import {useQuery} from '@apollo/client';
+import {QUERY_MONTHLY_EXPENSE} from '../../model/query';
+import {formatMoney} from '../../helper';
 const FixBudget = ({route, navigation}) => {
+  const {loading, error, data} = useQuery(QUERY_MONTHLY_EXPENSE);
+  console.log(data);
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
@@ -46,7 +50,9 @@ const FixBudget = ({route, navigation}) => {
         <View style={styles.root}>
           <View style={styles.contentHeader}>
             <Text style={{fontSize: 15}}>Số chi tiêu cố định</Text>
-            <Text style={styles.contentNumber}>2</Text>
+            <Text style={styles.contentNumber}>
+              {data?.user?.quizs?.[0]?.monthlyExpense.length || 2}
+            </Text>
           </View>
           <View style={styles.progressBar}>
             <Progress.Bar progress={1} width={330} color="#FAA934" />
@@ -56,42 +62,29 @@ const FixBudget = ({route, navigation}) => {
             </Text>
           </View>
           <View style={styles.tickBoxList}>
-            <View style={styles.tickBox}>
-              <View style={styles.tickBoxDetail}>
-                <CheckBox
-                  disabled={false}
-                  value={toggleCheckBox}
-                  onValueChange={newValue => setToggleCheckBox(newValue)}
-                  style={{width: 15, height: 15}}
-                  boxType={'square'}
-                />
-              </View>
-              <IconText
-                iconName="home"
-                text="Tiền thuê nhà"
-                color="black"
-                direction="row"
-              />
-              <Text style={styles.textMoney}>1.000.000 VNĐ</Text>
-            </View>
-            <View style={styles.tickBox}>
-              <View style={styles.tickBoxDetail}>
-                <CheckBox
-                  disabled={false}
-                  value={toggleCheckBox}
-                  onValueChange={newValue => setToggleCheckBox(newValue)}
-                  style={{width: 15, height: 15}}
-                  boxType={'square'}
-                />
-              </View>
-              <IconText
-                iconName="school"
-                text="Tiền học phí"
-                color="black"
-                direction="row"
-              />
-              <Text style={styles.textMoney}>200.000 VNĐ</Text>
-            </View>
+            {data?.user?.quizs &&
+              data?.user.quizs[0].monthlyExpense.map(expense => (
+                <View key={expense.category.name} style={styles.tickBox}>
+                  <View style={styles.tickBoxDetail}>
+                    <CheckBox
+                      disabled={true}
+                      value={expense.maxAmount === expense.currentAmount}
+                      // onValueChange={newValue => setToggleCheckBox(newValue)}
+                      style={{width: 15, height: 15}}
+                      boxType={'square'}
+                    />
+                  </View>
+                  <IconText
+                    iconName={expense.category.iconName}
+                    text={expense.category.name}
+                    color="black"
+                    direction="row"
+                  />
+                  <Text style={styles.textMoney}>
+                    {formatMoney(expense.maxAmount || 0)} VNĐ
+                  </Text>
+                </View>
+              ))}
           </View>
           <View style={{height: 50, marginTop: 16}}>
             <View style={styles.addButtonBox}>

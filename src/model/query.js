@@ -41,6 +41,7 @@ const SUMMIT_QUIZ = gql`
 const QUERY_QUIZ = gql`
   query GetRates {
     user {
+      id
       quizs {
         cash: monthlyBudget(input: CASH)
         vib: monthlyBudget(input: VIB)
@@ -65,4 +66,20 @@ const QUERY_QUIZ = gql`
     }
   }
 `;
-export {SUMMIT_QUIZ, REGISTER_USER, QUERY_QUIZ};
+const QUERY_MONTHLY_EXPENSE = gql`
+  {
+    user {
+      quizs {
+        monthlyExpense {
+          category {
+            name
+            iconName
+          }
+          maxAmount
+          currentAmount
+        }
+      }
+    }
+  }
+`;
+export {QUERY_MONTHLY_EXPENSE, SUMMIT_QUIZ, REGISTER_USER, QUERY_QUIZ};

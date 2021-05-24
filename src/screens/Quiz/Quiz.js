@@ -11,6 +11,8 @@ import {
 } from '../../../fakeData';
 import {SUMMIT_QUIZ} from '../../model/query';
 import {useMutation} from '@apollo/client';
+import {LogBox} from 'react-native';
+LogBox.ignoreLogs(['Cannot update a component']); // Ignore log notification by message
 class Category {
   constructor({name, iconName}) {
     this.name = name;
@@ -24,7 +26,7 @@ class Expense {
   }
 }
 const Quiz = ({navigation}) => {
-  const [registerUser] = useMutation(SUMMIT_QUIZ);
+  const [summitQuiz, {loading, error, data}] = useMutation(SUMMIT_QUIZ);
   const [step, setStep] = useState(0);
   const [quiz, setQuiz] = useState({
     vibBudget: '',
@@ -73,7 +75,9 @@ const Quiz = ({navigation}) => {
       />
     ),
   });
-
+  if (data) {
+    navigation.navigate('Overview');
+  }
   return (
     <View style={{flex: 1}}>
       {step === 0 && (
@@ -89,7 +93,7 @@ const Quiz = ({navigation}) => {
         <Quizgoal
           data={quiz}
           onPressNext={() => {
-            registerUser({
+            summitQuiz({
               variables: {
                 input: quiz,
               },
