@@ -42,8 +42,8 @@ const Quizavecost = ({ route, navigation }) => {
           <View style={styles.rowContainer}>
             <Text style={styles.text}>
               <IconText
-                iconName="checkroom"
-                text="Quần áo"
+                iconName="shopping-cart"
+                text="Mua sắm"
                 color="black"
                 direction="row"
               />
@@ -60,7 +60,7 @@ const Quizavecost = ({ route, navigation }) => {
           <View style={styles.rowContainer}>
             <Text style={styles.text}>
               <IconText
-                iconName="local-grocery-store"
+                iconName="local-convenience-store"
                 text="Đi chợ"
                 color="black"
                 direction="row"
@@ -99,7 +99,6 @@ const Quizavecost = ({ route, navigation }) => {
               title="Thêm khoản khác +"
               titleStyle={{ fontSize: 15, color: "black" }}
             >
-              {" "}
             </Button>
           </View>
         </View>
