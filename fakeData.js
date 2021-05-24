@@ -147,3 +147,31 @@ export const moneySource = {
     iconName: 'credit-card',
   },
 };
+export const monthyExpenseCategories = [
+  {
+    name: 'Tiền thuê nhà',
+    iconName: 'home',
+  },
+  {
+    name: 'Tiền subscription',
+    iconName: 'movie',
+  },
+  {
+    name: 'Tiền học phí',
+    iconName: 'school',
+  },
+];
+export const limitExpenseCategories = [
+  {
+    name: 'Tiền thuê nhà',
+    iconName: 'home',
+  },
+  {
+    name: 'Tiền subscription',
+    iconName: 'movie',
+  },
+  {
+    name: 'Tiền học phí',
+    iconName: 'school',
+  },
+];

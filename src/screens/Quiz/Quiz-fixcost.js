@@ -6,7 +6,9 @@ import IconText from '../../components/icons/IconText';
 import {Button} from 'react-native-elements/dist/buttons/Button';
 import * as Progress from 'react-native-progress';
 
-const Quizfixcost = ({route, navigation, onPressNext}) => {
+const Quizfixcost = ({setData, data, onPressNext}) => {
+  const [monthlyExpense, setMonthlyExpense] = useState(data.monthlyExpense);
+
   return (
     <SafeAreaView style={styles.container}>
       <Progress.Bar
@@ -20,60 +22,36 @@ const Quizfixcost = ({route, navigation, onPressNext}) => {
           Trong tháng tới bạn sẽ có những khoản chi tiêu cố định nào?{' '}
         </Text>
         <View style={styles.root}>
-          <View style={styles.rowContainer}>
-            <Text style={styles.text}>
-              <IconText
-                iconName="home"
-                text="Tiền thuê nhà"
-                color="black"
-                direction="row"
-              />
-            </Text>
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.textInput}
-                placeholder="0"
-                placeholderTextColor="white"
-              />
-              <Text style={{color: 'white'}}>VND</Text>
+          {monthlyExpense.map((expense, index) => (
+            <View key={Math.random()} style={styles.rowContainer}>
+              <Text style={styles.text}>
+                <IconText
+                  iconName={expense.category.iconName}
+                  text={expense.category.name}
+                  color="black"
+                  direction="row"
+                />
+              </Text>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  value={expense.maxAmount.toString()}
+                  onChangeText={value => {
+                    const newMonthly = [...monthlyExpense];
+                    newMonthly[index] = {
+                      ...expense,
+                      maxAmount: parseInt(value),
+                    };
+                    setMonthlyExpense(newMonthly);
+                  }}
+                  style={styles.textInput}
+                  placeholder="0"
+                  placeholderTextColor="white"
+                />
+                <Text style={{color: 'white'}}>VND</Text>
+              </View>
             </View>
-          </View>
-          <View style={styles.rowContainer}>
-            <Text style={styles.text}>
-              <IconText
-                iconName="movie"
-                text="Tiền subscription"
-                color="black"
-                direction="row"
-              />
-            </Text>
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.textInput}
-                placeholder="0"
-                placeholderTextColor="white"
-              />
-              <Text style={{color: 'white'}}>VND</Text>
-            </View>
-          </View>
-          <View style={styles.rowContainer}>
-            <Text style={styles.text}>
-              <IconText
-                iconName="school"
-                text="Tiền học phí"
-                color="black"
-                direction="row"
-              />
-            </Text>
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.textInput}
-                placeholder="0"
-                placeholderTextColor="white"
-              />
-              <Text style={{color: 'white'}}>VND</Text>
-            </View>
-          </View>
+          ))}
+
           <View style={styles.addButtonBox}>
             <Button
               style={styles.addButton}
@@ -84,7 +62,16 @@ const Quizfixcost = ({route, navigation, onPressNext}) => {
           </View>
         </View>
       </ScrollView>
-      <VIBButton title="tiếp tục" onPress={onPressNext} />
+      <VIBButton
+        title="tiếp tục"
+        onPress={() => {
+          onPressNext();
+          setData({
+            ...data,
+            monthlyExpense,
+          });
+        }}
+      />
     </SafeAreaView>
   );
 };
