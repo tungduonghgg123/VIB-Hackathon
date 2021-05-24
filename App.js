@@ -18,10 +18,7 @@ import Dashboard from './src/screens/Dashboard/Dashboard';
 import Confirm from './src/screens/Confirm/Confirm';
 import AddExpense from './src/screens/AddExpense/AddExpense';
 import {TouchableOpacity, Text} from 'react-native';
-import Quizbudget from './src/screens/Quiz/Quiz-budget';
-import Quizfixcost from './src/screens/Quiz/Quiz-fixcost';
-import Quizavecost from './src/screens/Quiz/Quiz-avecost';
-import Quizgoal from './src/screens/Quiz/Quiz-goal';
+import Quiz from './src/screens/Quiz/Quiz';
 import Overview from './src/screens/BudgetPlan/Overview';
 import FixBudget from './src/screens/BudgetPlan/FixBudget';
 import NonFixBudget from './src/screens/BudgetPlan/NonFixBudget';
@@ -103,29 +100,8 @@ function App() {
               }}
             />
             <Stack.Screen
-              name="Quizbudget"
-              component={Quizbudget}
-              options={{
-                title: 'Tạo ngân sách chi tiêu',
-              }}
-            />
-            <Stack.Screen
-              name="Quizfixcost"
-              component={Quizfixcost}
-              options={{
-                title: 'Tạo ngân sách chi tiêu',
-              }}
-            />
-            <Stack.Screen
-              name="Quizavecost"
-              component={Quizavecost}
-              options={{
-                title: 'Tạo ngân sách chi tiêu',
-              }}
-            />
-            <Stack.Screen
-              name="Quizgoal"
-              component={Quizgoal}
+              name="Quiz"
+              component={Quiz}
               options={{
                 title: 'Tạo ngân sách chi tiêu',
               }}

@@ -40,7 +40,7 @@ const Dashboard = ({navigation}) => {
             </Text>
             <TouchableOpacity
               style={styles.notiButton}
-              onPress={() => navigation.navigate('Quizbudget')}>
+              onPress={() => navigation.navigate('Quiz')}>
               <Text style={{color: 'white'}}>Tạo ngân sách chi tiêu</Text>
             </TouchableOpacity>
           </View>
