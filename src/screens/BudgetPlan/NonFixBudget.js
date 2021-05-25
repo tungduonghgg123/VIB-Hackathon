@@ -72,7 +72,7 @@ const NonFixBudget = ({data}) => {
               </View>
               {data?.dict[expense.category.name]?.map(transaction => (
                 <TouchableOpacity
-                  key={transaction.date}
+                  key={transaction.date + Math.random()}
                   style={styles.categoryBox}>
                   <View>
                     <View style={styles.categoryBoxContent}>

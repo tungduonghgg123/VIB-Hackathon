@@ -113,6 +113,7 @@ const QUERY_SPENDING_TRACKER = gql`
         amount
         date
         message
+        note
       }
       quizs {
         cash: monthlyBudget(input: CASH)

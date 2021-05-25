@@ -139,12 +139,15 @@ export const categories = {
 export const moneySource = {
   'Ngân sách tiền mặt': {
     iconName: 'money',
+    value: 'CASH',
   },
   'Ngân sách từ các nguồn ngoài VIB': {
     iconName: 'payments',
+    value: 'OTHER_BANK',
   },
   'Ngân sách ví điện tử': {
     iconName: 'credit-card',
+    value: 'E_WALLET',
   },
 };
 export const monthyExpenseCategories = [

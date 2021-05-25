@@ -8,34 +8,28 @@ import SelectCategories from '../../components/SelectCategories';
 import {categories, moneySource} from '../../../fakeData';
 import RecordModal from '../../components/RecordModal';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { set } from 'react-native-reanimated';
 
-const AddExpense = ({route, navigation}) => {
-  const [amount, setAmount] = useState('');
-  const [fullCategory, setFullCategory] = useState('');
+const AddExpense = ({
+  date,
+  setDate,
+  onDateChange,
+  amount,
+  setAmount,
+  note,
+  setNote,
+  setFullCategory,
+  setBudget,
+}) => {
   const [recordFilePath, setRecordFilePath] = useState('');
   const [showVoiceRecordingModal, setShowVoiceRecordingModal] = useState(false);
   const [voiceRecognitionResult, setVoiceRecognitionResult] = useState('');
-  const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
-
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'ios');
-    setDate(currentDate);
-    setShow(false)
-  };
-  const showMode = (currentMode) => {
-    setShow(true);
-    setMode(currentMode);
-  };
-
   useEffect(() => {
     //có giá trị k có gtri
-    if (voiceRecognitionResult!= null) {
-      setFullCategory("" + voiceRecognitionResult.spending_type);
-      categories = "" + voiceRecognitionResult.money;
+    if (voiceRecognitionResult != null) {
+      // setFullCategory('' + voiceRecognitionResult.spending_type);
+      // categories = '' + voiceRecognitionResult.money;
     }
   }, [voiceRecognitionResult]);
   return (
@@ -59,13 +53,14 @@ const AddExpense = ({route, navigation}) => {
       </Text>
       <Text style={styles.text}>Hoặc nhập tay khoản chi tiêu</Text>
       <View style={styles.dateinput}>
-        <Text style={{fontSize: 13, color: '#979797',}}>Ngày</Text>
-        <DateTimePicker 
-          value={ date }
-          mode='date'
-          display='default'
-          onChange={onChange}
-          style={{width: 130, justifyContent:"center"}} />
+        <Text style={{fontSize: 13, color: '#979797'}}>Ngày</Text>
+        <DateTimePicker
+          value={date}
+          mode="date"
+          display="default"
+          onChange={onDateChange}
+          style={{width: 130, justifyContent: 'center'}}
+        />
       </View>
       <InputAmount amount={amount} setAmount={setAmount} />
       <SelectCategories
@@ -73,10 +68,14 @@ const AddExpense = ({route, navigation}) => {
         setFullCategory={setFullCategory}
         placeholder="Chọn Danh mục chi tiêu hoặc Ngân sách được nạp"
       />
-      <SimpleTextInput placeholder={"Ghi chú cho khoản chi tiêu (không bắt buộc)"} />
+      <SimpleTextInput
+        text={note}
+        setText={setNote}
+        placeholder={'Ghi chú cho khoản chi tiêu (không bắt buộc)'}
+      />
       <SelectCategories
         categories={moneySource}
-        setFullCategory={setFullCategory}
+        setFullCategory={setBudget}
         placeholder="Chọn ngân sách của khoản chi tiêu"
         shouldChooseSubCategory={false}
       />
@@ -106,15 +105,15 @@ const styles = {
     fontStyle: 'italic',
   },
   dateinput: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
     height: 58,
     paddingHorizontal: 31,
     paddingTop: 0,
-    flexDirection: "row",
+    flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems:'center',
+    alignItems: 'center',
     margin: 10,
-    borderRadius:5
-  }
+    borderRadius: 5,
+  },
 };
 export default AddExpense;

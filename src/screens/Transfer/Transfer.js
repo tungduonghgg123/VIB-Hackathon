@@ -10,7 +10,6 @@ const Transfer = ({navigation}) => {
   const {loading, error, data} = useQuery(QUERY_CONTACTS, {
     fetchPolicy: 'no-cache',
   });
-  console.log(loading, error, data);
   return (
     <View style={styles.container}>
       <View style={styles.transferOptionsContainer}>

@@ -124,7 +124,7 @@ const SpendingTracker = ({route, navigation}) => {
                       iconSize={20}
                     />
                     <Text style={styles.categoryBoxContentText}>
-                      - {transaction.message}
+                      - {transaction.note}
                     </Text>
                   </View>
                   <Text style={styles.categoryBoxMoney}>
@@ -142,13 +142,13 @@ const SpendingTracker = ({route, navigation}) => {
               </TouchableOpacity>
             ))}
           </View>
-
-        ))}
-      </ ScrollView>
-      <View style={{flex:1, marginRight: 40}}>
-        <TouchableHighlight style={{position:'absolute',bottom:10,alignSelf:'flex-end'}} onPress={()=> navigation.navigate("AddExpense")}>
-            <Icon name="add" style={styles.icon} size={40} color="white"></Icon>
-
+        )}
+      </ScrollView>
+      <View style={{flex: 1, marginRight: 40}}>
+        <TouchableHighlight
+          style={{position: 'absolute', bottom: 10, alignSelf: 'flex-end'}}
+          onPress={() => navigation.navigate('AddExpense')}>
+          <Icon name="add" style={styles.icon} size={40} color="white" />
         </TouchableHighlight>
       </View>
     </SafeAreaView>

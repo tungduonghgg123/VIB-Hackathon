@@ -15,7 +15,7 @@ import Transfer from './src/screens/Transfer/Transfer';
 import InternalTransfer from './src/screens/InternalTransfer/InternalTransfer';
 import TransactionDetail from './src/screens/TransactionDetail/TransactionDetail';
 import Confirm from './src/screens/Confirm/Confirm';
-import AddExpense from './src/screens/AddExpense/AddExpense';
+import AddExpenseController from './src/screens/AddExpense/AddExpenseController';
 import {TouchableOpacity, Text} from 'react-native';
 import QuizController from './src/screens/Quiz/QuizController';
 import FixBudget from './src/screens/BudgetPlan/FixBudget';
@@ -84,19 +84,9 @@ function App() {
             />
             <Stack.Screen
               name="AddExpense"
-              component={AddExpense}
+              component={AddExpenseController}
               options={{
                 title: 'Thêm khoản chi tiêu',
-                headerLeft: props => (
-                  <TouchableOpacity {...props}>
-                    <Text style={styles.headerLeft}>Huỷ</Text>
-                  </TouchableOpacity>
-                ),
-                headerRight: props => (
-                  <TouchableOpacity {...props}>
-                    <Text style={styles.headerRight}>Lưu</Text>
-                  </TouchableOpacity>
-                ),
               }}
             />
             <Stack.Screen
