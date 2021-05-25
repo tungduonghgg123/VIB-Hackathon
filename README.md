@@ -7,9 +7,8 @@ Transfer Dashboard screen|Money Transfer Internally screen | Transaction Detail 
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
 ![Alt Text](https://media.giphy.com/media/dHfybfdTqLauqJxWN2/giphy.gif)|  ![Alt Text](https://media.giphy.com/media/KZSnD9FDJcF3CT8xqM/giphy.gif)| ![Alt Text](https://media.giphy.com/media/v3cpFbHzWSuogvSiMW/giphy.gif)| ![Alt Text](https://media.giphy.com/media/toGSjwLDzFeYeIU0dC/giphy.gif)
 
-  
-
-
+## Architecture
+This project takes advantage of the MVVM model. Though for the sake of an adhoc release, these are components (and its related components) are applied this model: Quiz, Overview, Dashboard; the others are partly applied. More detail on this model is presented on the team's slides.
 
 ## Installation 
 Preresquisite: Please make sure you have set up the environment to run a react-native project: [How to set up environment](https://reactnative.dev/docs/environment-setup) 
