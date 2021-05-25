@@ -15,17 +15,31 @@ import RadioForm, {
   RadioButtonInput,
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
+import {MAKE_TRANSACTION} from '../../model/query';
+import {useMutation} from '@apollo/client';
 var radio_props = [
-  {label: 'Lưu thông tin người thụ hưởng', value: 0},
-  {label: 'Lưu thông tin người thụ hưởng kèm Danh mục chi tiêu', value: 1},
-  ,
+  {label: 'Lưu thông tin người thụ hưởng', value: 'WITHOUT_CATEGORY'},
+  {
+    label: 'Lưu thông tin người thụ hưởng kèm Danh mục chi tiêu',
+    value: 'WITH_CATEGORY',
+  },
 ];
+
 const Confirm = ({route, navigation}) => {
-  const {amount, fullCategory, accountNumber, realName} = route.params || {};
-  const [value, setValue] = useState(-1);
+  const [makeTransaction, {data, loading, error}] = useMutation(
+    MAKE_TRANSACTION,
+  );
+  const {amount, category} = route.params || {};
+  const {accountNumber, realName, bank} = route.params?.receiver || {};
+  const [nickname, setNickname] = useState('');
+
+  const [value, setValue] = useState('NO');
   const onRadioButtonPress = newValue => {
-    newValue === value ? setValue(-1) : setValue(newValue);
+    newValue === value ? setValue('NO') : setValue(newValue);
   };
+  if (data) {
+    navigation.navigate('Transfer');
+  }
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
@@ -38,11 +52,14 @@ const Confirm = ({route, navigation}) => {
         </View>
         <FieldValue field="Số tiền" value={`${amount} VND`} blueValue />
         <FieldValue field="Từ tài khoản" value="23102000" />
-        <FieldValue field="Danh mục chi tiêu" value={fullCategory} />
+        <FieldValue
+          field="Danh mục chi tiêu"
+          value={category?.name + ' - ' + category?.subCategoryName}
+        />
         <View style={styles.separater} />
         <FieldValue field="Tên tài khoản" value={realName} />
         <FieldValue field="Số tài khoản" value={accountNumber} />
-        <FieldValue field="Ngân hàng" value="TP Bank" />
+        <FieldValue field="Ngân hàng" value={bank} />
         <FieldValue field="Phí giao dịch" value="0 VND" blueValue />
         <RadioForm style={{marginTop: 10}}>
           {radio_props.map((obj, i) => (
@@ -50,7 +67,7 @@ const Confirm = ({route, navigation}) => {
               <RadioButtonInput
                 obj={obj}
                 index={i}
-                isSelected={value === i}
+                isSelected={value === obj.value}
                 onPress={onRadioButtonPress}
                 borderWidth={1}
                 buttonInnerColor={'#0066B3'}
@@ -76,7 +93,7 @@ const Confirm = ({route, navigation}) => {
             </RadioButton>
           ))}
         </RadioForm>
-        {value !== -1 && (
+        {value !== 'NO' && (
           <View
             style={{
               ...styles.pleaseConfirmContainer,
@@ -84,6 +101,8 @@ const Confirm = ({route, navigation}) => {
               height: 30,
             }}>
             <TextInput
+              value={nickname}
+              onChangeText={setNickname}
               style={styles.pleaseConfirmText}
               placeholderTextColor="#979797"
               placeholder="Đặt tên cho người thụ hưởng theo ý thích (không bắt buộc)"
@@ -93,7 +112,23 @@ const Confirm = ({route, navigation}) => {
       </ScrollView>
       <VIBButton
         title="xác nhận"
-        onPress={() => navigation.navigate('Transfer')}
+        onPress={() => {
+          makeTransaction({
+            variables: {
+              transaction: {
+                from: 'VIB',
+                ...route.params,
+                receiver: {
+                  bank,
+                  nickname,
+                  realName,
+                  accountNumber,
+                },
+              },
+              saveMode: value,
+            },
+          });
+        }}
       />
     </SafeAreaView>
   );

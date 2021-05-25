@@ -12,14 +12,15 @@ import {categories} from '../../../fakeData';
 const TransactionDetail = ({route, navigation}) => {
   const [amount, setAmount] = useState('');
   const [fullCategory, setFullCategory] = useState('');
-
+  const [message, setMessage] = useState('');
+  const [note, setNote] = useState('');
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView bounces={false} keyboardShouldPersistTaps="handled">
         <Card style={styles.contactContainer}>
           <Contact
-            realName={route.params?.realName}
-            accountNumber={route.params?.accountNumber}
+            realName={route.params?.receiver.realName}
+            accountNumber={route.params?.receiver.accountNumber}
             subTitleStyle={styles.contact}
             iconSize={31}
             disabled={true}
@@ -36,22 +37,31 @@ const TransactionDetail = ({route, navigation}) => {
             </Text>
           </View>
         </Card>
-        <SimpleTextInput placeholder="Nội dung (không bắt buộc)" />
+        <SimpleTextInput
+          text={message}
+          setText={setMessage}
+          placeholder="Nội dung (không bắt buộc)"
+        />
         <SelectCategories
           categories={categories}
           setFullCategory={setFullCategory}
           placeholder="Chọn Danh mục chi tiêu hoặc Ngân sách được nạp"
         />
-        <SimpleTextInput placeholder="Ghi chú cho khoản chi tiêu (không bắt buộc)" />
+        <SimpleTextInput
+          text={note}
+          setText={setNote}
+          placeholder="Ghi chú cho khoản chi tiêu (không bắt buộc)"
+        />
       </ScrollView>
       <VIBButton
         title="tiếp tục"
         onPress={() =>
           navigation.navigate('Confirm', {
-            amount,
-            fullCategory,
-            accountNumber: route.params?.accountNumber,
-            realName: route.params?.realName,
+            ...route.params,
+            amount: parseInt(amount.replace(/,/g, '')),
+            message,
+            category: fullCategory,
+            note,
           })
         }
       />

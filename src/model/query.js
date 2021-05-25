@@ -38,6 +38,26 @@ const SUMMIT_QUIZ = gql`
     }
   }
 `;
+const MAKE_TRANSACTION = gql`
+  mutation makeTransaction(
+    $transaction: TransactionInput!
+    $saveMode: SaveReciever
+  ) {
+    makeTransaction(input: $transaction, save: $saveMode) {
+      from
+      date
+      category {
+        name
+        subCategories {
+          name
+          contacts {
+            realName
+          }
+        }
+      }
+    }
+  }
+`;
 const QUERY_QUIZ = gql`
   query GetRates {
     user {
@@ -104,10 +124,32 @@ const QUERY_SPENDING_TRACKER = gql`
     }
   }
 `;
+const QUERY_CONTACTS = gql`
+  {
+    user {
+      categories {
+        name
+        iconName
+        subCategories {
+          name
+          iconName
+          contacts {
+            realName
+            nickname
+            accountNumber
+            bank
+          }
+        }
+      }
+    }
+  }
+`;
 export {
   QUERY_MONTHLY_EXPENSE,
   SUMMIT_QUIZ,
   REGISTER_USER,
   QUERY_QUIZ,
   QUERY_SPENDING_TRACKER,
+  QUERY_CONTACTS,
+  MAKE_TRANSACTION,
 };

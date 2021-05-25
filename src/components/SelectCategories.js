@@ -15,7 +15,18 @@ const SelectCategories = ({
   const [selectedSubCategory, setSubCategory] = useState('');
   const [isCollapsed, setIsCollapsed] = useState(true);
   useEffect(() => {
-    setFullCategory(selectedCategory + ' - ' + selectedSubCategory);
+    if (selectedCategory) {
+      setFullCategory({
+        name: selectedCategory,
+        iconName: categories[selectedCategory].iconName,
+        subCategoryName: selectedSubCategory || 'undefined',
+        subCategoryIconName: selectedSubCategory
+          ? categories[selectedCategory].subCategories.find(
+              subCategory => subCategory.name === selectedSubCategory,
+            ).iconName
+          : 'undefined',
+      });
+    }
   }, [selectedCategory, selectedSubCategory, setFullCategory]);
   const onHeaderPress = () => setIsCollapsed(!isCollapsed);
   const renderAddCategories = title => (
