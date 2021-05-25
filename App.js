@@ -19,13 +19,13 @@ import AddExpense from './src/screens/AddExpense/AddExpense';
 import {TouchableOpacity, Text} from 'react-native';
 import QuizController from './src/screens/Quiz/QuizController';
 import FixBudget from './src/screens/BudgetPlan/FixBudget';
-import NonFixBudget from './src/screens/BudgetPlan/NonFixBudget';
 import SpendingTracker from './src/screens/BudgetPlan/SpendingTracker';
 
 import {ApolloProvider} from '@apollo/client/react';
 import client from './src/model';
 import DashboardController from './src/screens/Dashboard/DashboardController';
 import OverviewController from './src/screens/BudgetPlan/OverviewController';
+import NonFixBudgetController from './src/screens/BudgetPlan/NonFixBudgetController';
 
 const Stack = createStackNavigator();
 
@@ -128,7 +128,7 @@ function App() {
             />
             <Stack.Screen
               name="NonFixBudget"
-              component={NonFixBudget}
+              component={NonFixBudgetController}
               options={{
                 title: 'Kế hoạch chi tiêu',
               }}

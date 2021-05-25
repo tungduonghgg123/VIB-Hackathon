@@ -144,6 +144,35 @@ const QUERY_CONTACTS = gql`
     }
   }
 `;
+const QUERY_LIMIT_EXPENSE = gql`
+  {
+    user {
+      transactions {
+        date
+        amount
+        message
+        category {
+          name
+          iconName
+          subCategories {
+            name
+            iconName
+          }
+        }
+      }
+      quizs {
+        limitExpense {
+          category {
+            name
+            iconName
+          }
+          maxAmount
+          currentAmount
+        }
+      }
+    }
+  }
+`;
 export {
   QUERY_MONTHLY_EXPENSE,
   SUBMIT_QUIZ,
@@ -152,4 +181,5 @@ export {
   QUERY_SPENDING_TRACKER,
   QUERY_CONTACTS,
   MAKE_TRANSACTION,
+  QUERY_LIMIT_EXPENSE,
 };
