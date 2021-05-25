@@ -12,7 +12,7 @@ const voiceToText = async recordPath => {
   try {
     const json = await RNFetchBlob.fetch(
       'POST',
-      'http://server.etronresearch.work:3939/v1/api/asr',
+      'https://teamhtd-vib-voiceapi.herokuapp.com/v1/api/asr',
       {
         'Content-Type': 'multipart/form-data',
       },

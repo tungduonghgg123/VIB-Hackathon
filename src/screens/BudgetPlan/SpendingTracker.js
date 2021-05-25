@@ -142,12 +142,13 @@ const SpendingTracker = ({route, navigation}) => {
               </TouchableOpacity>
             ))}
           </View>
-        )}
-      </ScrollView>
-      <View style={{flex: 1, marginRight: 40}}>
-        <TouchableHighlight
-          style={{position: 'absolute', bottom: 10, alignSelf: 'flex-end'}}>
-          <Icon name="add" style={styles.icon} size={40} color="white" />
+
+        ))}
+      </ ScrollView>
+      <View style={{flex:1, marginRight: 40}}>
+        <TouchableHighlight style={{position:'absolute',bottom:10,alignSelf:'flex-end'}} onPress={()=> navigation.navigate("AddExpense")}>
+            <Icon name="add" style={styles.icon} size={40} color="white"></Icon>
+
         </TouchableHighlight>
       </View>
     </SafeAreaView>
