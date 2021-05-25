@@ -1,62 +1,24 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {Text, View} from 'react-native';
 import Quizbudget from './Quiz-budget';
 import QuizFixCost from './Quiz-fixcost';
 import Quizavecost from './Quiz-avecost';
 import Quizgoal from './Quiz-goal';
 import {HeaderBackButton} from '@react-navigation/stack';
-import {
-  limitExpenseCategories,
-  monthyExpenseCategories,
-} from '../../../fakeData';
-import {SUMMIT_QUIZ} from '../../model/query';
-import {useMutation} from '@apollo/client';
+
 import {LogBox} from 'react-native';
+import {QuizViewModel, Quiz} from './QuizViewModel';
 LogBox.ignoreLogs(['Cannot update a component']); // Ignore log notification by message
-class Category {
-  constructor({name, iconName}) {
-    this.name = name;
-    this.iconName = iconName;
-  }
-}
-class Expense {
-  constructor({category, maxAmount}) {
-    this.category = new Category(category);
-    this.maxAmount = maxAmount;
-  }
-}
+
 const QuizController = ({navigation}) => {
-  const [summitQuiz, {loading, error, data}] = useMutation(SUMMIT_QUIZ);
+  const QuizViewModelRef = useRef({});
   const [step, setStep] = useState(0);
-  const [quiz, setQuiz] = useState({
-    vibBudget: '',
-    otherBankBudget: '',
-    cashBudget: '',
-    eWalletBudget: '',
-    monthlyExpense: monthyExpenseCategories.map(
-      category =>
-        new Expense({
-          category: new Category({
-            name: category.name,
-            iconName: category.iconName,
-          }),
-          maxAmount: 0,
-        }),
-    ),
-    limitExpense: limitExpenseCategories.map(
-      category =>
-        new Expense({
-          category: new Category({
-            name: category.name,
-            iconName: category.iconName,
-          }),
-          maxAmount: 0,
-        }),
-    ),
-  });
+  const [quiz, setQuiz] = useState(new Quiz());
+  const [quizResult, setquizResult] = useState();
 
   const onPressNext = () => setStep(step + 1);
   const onPressBack = () => setStep(step - 1);
+
   navigation.setOptions({
     headerLeft: props => (
       <HeaderBackButton
@@ -75,11 +37,15 @@ const QuizController = ({navigation}) => {
       />
     ),
   });
-  if (data) {
+  if (quizResult) {
     navigation.navigate('Overview');
   }
   return (
     <View style={{flex: 1}}>
+      <QuizViewModel
+        myRef={QuizViewModelRef}
+        submitQuizResult={setquizResult}
+      />
       {step === 0 && (
         <Quizbudget onPressNext={onPressNext} data={quiz} setData={setQuiz} />
       )}
@@ -93,7 +59,7 @@ const QuizController = ({navigation}) => {
         <Quizgoal
           data={quiz}
           onPressNext={() => {
-            summitQuiz({
+            QuizViewModelRef.current.submitQuiz({
               variables: {
                 input: quiz,
               },

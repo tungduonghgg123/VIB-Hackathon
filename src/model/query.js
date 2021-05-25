@@ -12,7 +12,7 @@ const REGISTER_USER = gql`
     }
   }
 `;
-const SUMMIT_QUIZ = gql`
+const SUBMIT_QUIZ = gql`
   mutation summitQuiz($input: QuizInput) {
     submitQuiz(input: $input) {
       cash: monthlyBudget(input: CASH)
@@ -146,7 +146,7 @@ const QUERY_CONTACTS = gql`
 `;
 export {
   QUERY_MONTHLY_EXPENSE,
-  SUMMIT_QUIZ,
+  SUBMIT_QUIZ,
   REGISTER_USER,
   QUERY_QUIZ,
   QUERY_SPENDING_TRACKER,
