@@ -9,7 +9,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createStackNavigator, HeaderBackButton} from '@react-navigation/stack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Transfer from './src/screens/Transfer/Transfer';
 import InternalTransfer from './src/screens/InternalTransfer/InternalTransfer';
@@ -109,9 +109,15 @@ function App() {
             <Stack.Screen
               name="Overview"
               component={Overview}
-              options={{
+              options={({navigation}) => ({
                 title: 'Quản lý tài chính',
-              }}
+                headerLeft: props => (
+                  <HeaderBackButton
+                    {...props}
+                    onPress={() => navigation.navigate('Dashboard')}
+                  />
+                ),
+              })}
             />
             <Stack.Screen
               name="FixBudget"

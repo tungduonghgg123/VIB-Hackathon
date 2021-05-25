@@ -6,8 +6,6 @@ import * as Progress from 'react-native-progress';
 import {useQuery} from '@apollo/client';
 import {QUERY_QUIZ} from '../../model/query';
 import {formatMoney} from '../../helper';
-const moneyLeftReducer = (left, currentExpense) =>
-  left + currentExpense.maxAmount - currentExpense.currentAmount;
 const extractRemainingPercantage = expense => {
   let total = 0;
   let used = 0;
@@ -15,7 +13,7 @@ const extractRemainingPercantage = expense => {
     total += e.maxAmount;
     used += e.currentAmount;
   });
-  return used / total;
+  return total === 0 ? 1 : used / total;
 };
 const Overview = ({route, navigation}) => {
   const {loading, error, data} = useQuery(QUERY_QUIZ);
@@ -46,7 +44,9 @@ const Overview = ({route, navigation}) => {
     } = data.user.quizs[0];
     setDerivedInformation({
       remainingBudget: cash + ewallet + out + vib,
-      budgetLeftInPercentage: (cash + ewallet + out + vib) / monthlyTotalBudget,
+      budgetLeftInPercentage: monthlyTotalBudget
+        ? (cash + ewallet + out + vib) / monthlyTotalBudget
+        : 1,
       limitExpenseCount: limitExpense.length,
       monthlyExpenseCount: monthlyExpense.length,
       monthlyExpenseLeftInPercentage: extractRemainingPercantage(
