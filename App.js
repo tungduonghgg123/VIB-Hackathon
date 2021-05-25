@@ -17,7 +17,7 @@ import TransactionDetail from './src/screens/TransactionDetail/TransactionDetail
 import Confirm from './src/screens/Confirm/Confirm';
 import AddExpense from './src/screens/AddExpense/AddExpense';
 import {TouchableOpacity, Text} from 'react-native';
-import Quiz from './src/screens/Quiz/Quiz';
+import QuizController from './src/screens/Quiz/QuizController';
 import Overview from './src/screens/BudgetPlan/Overview';
 import FixBudget from './src/screens/BudgetPlan/FixBudget';
 import NonFixBudget from './src/screens/BudgetPlan/NonFixBudget';
@@ -101,7 +101,7 @@ function App() {
             />
             <Stack.Screen
               name="Quiz"
-              component={Quiz}
+              component={QuizController}
               options={{
                 title: 'Tạo ngân sách chi tiêu',
               }}

@@ -25,7 +25,7 @@ class Expense {
     this.maxAmount = maxAmount;
   }
 }
-const Quiz = ({navigation}) => {
+const QuizController = ({navigation}) => {
   const [summitQuiz, {loading, error, data}] = useMutation(SUMMIT_QUIZ);
   const [step, setStep] = useState(0);
   const [quiz, setQuiz] = useState({
@@ -105,4 +105,4 @@ const Quiz = ({navigation}) => {
     </View>
   );
 };
-export default Quiz;
+export default QuizController;
