@@ -1,13 +1,11 @@
-import React, {useState} from 'react';
-import {ScrollView, View, TextInput, Text} from 'react-native';
+import React from 'react';
+import {ScrollView, View, Text} from 'react-native';
 import {SafeAreaView} from 'react-native';
 import VIBButton from '../../components/VIBButton';
 import {Icon} from 'react-native-elements';
 import * as Progress from 'react-native-progress';
-import {useNavigation} from '@react-navigation/core';
 
 const Quizgoal = ({onPressNext}) => {
-  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <Progress.Bar
@@ -51,12 +49,7 @@ const Quizgoal = ({onPressNext}) => {
           </View>
         </View>
       </ScrollView>
-      <VIBButton
-        title="tiếp tục"
-        onPress={() => {
-          onPressNext();
-        }}
-      />
+      <VIBButton title="tiếp tục" onPress={onPressNext} />
     </SafeAreaView>
   );
 };
