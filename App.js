@@ -14,7 +14,6 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Transfer from './src/screens/Transfer/Transfer';
 import InternalTransfer from './src/screens/InternalTransfer/InternalTransfer';
 import TransactionDetail from './src/screens/TransactionDetail/TransactionDetail';
-import Dashboard from './src/screens/Dashboard/Dashboard';
 import Confirm from './src/screens/Confirm/Confirm';
 import AddExpense from './src/screens/AddExpense/AddExpense';
 import {TouchableOpacity, Text} from 'react-native';
@@ -26,6 +25,7 @@ import SpendingTracker from './src/screens/BudgetPlan/SpendingTracker';
 
 import {ApolloProvider} from '@apollo/client/react';
 import client from './src/model';
+import DashboardController from './src/screens/Dashboard/DashboardController';
 
 const Stack = createStackNavigator();
 
@@ -56,7 +56,7 @@ function App() {
             />
             <Stack.Screen
               name="Dashboard"
-              component={Dashboard}
+              component={DashboardController}
               options={{
                 headerShown: false,
               }}

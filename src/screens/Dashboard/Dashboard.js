@@ -1,25 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {SafeAreaView, TouchableOpacity, View, Text} from 'react-native';
 import {ImageBackground} from 'react-native';
-import {useMutation} from '@apollo/client';
 import LoadingOverlay from '../../components/LoadingOverlay';
-import {storeData} from '../../helper/asyncStorage';
-import {REGISTER_USER} from '../../model/query';
 const IMAGENAME = require('../../assets/Homescreen.png');
 
 // TODO: Change color for bottom and top SafeAreaView ; Crop the image => get rid of header
 
-const Dashboard = ({navigation}) => {
-  const [imageHeight, setImageHeight] = useState(0);
-  const [registerUser, {data, loading, error}] = useMutation(REGISTER_USER);
-  useEffect(() => {
-    registerUser();
-  }, [registerUser]);
-  useEffect(() => {
-    if (data) {
-      storeData('userid', data.registerUser.id);
-    }
-  }, [data]);
+const Dashboard = ({imageHeight, setImageHeight, loading, error, navigate}) => {
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
@@ -40,7 +27,7 @@ const Dashboard = ({navigation}) => {
             </Text>
             <TouchableOpacity
               style={styles.notiButton}
-              onPress={() => navigation.navigate('Quiz')}>
+              onPress={navigate('Quiz')}>
               <Text style={{color: 'white'}}>Tạo ngân sách chi tiêu</Text>
             </TouchableOpacity>
           </View>
@@ -56,7 +43,7 @@ const Dashboard = ({navigation}) => {
             />
             <TouchableOpacity
               style={{flex: 1}}
-              onPress={() => navigation.navigate('Transfer')}
+              onPress={navigate('Transfer')}
             />
             <TouchableOpacity style={{flex: 1}} />
           </View>
@@ -65,7 +52,7 @@ const Dashboard = ({navigation}) => {
             <TouchableOpacity style={{flex: 1}} />
             <TouchableOpacity
               style={{flex: 1}}
-              onPress={() => navigation.navigate('Overview')}
+              onPress={navigate('Overview')}
             />
           </View>
         </View>
