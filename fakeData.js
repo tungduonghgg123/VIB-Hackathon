@@ -147,3 +147,35 @@ export const moneySource = {
     iconName: 'credit-card',
   },
 };
+export const monthyExpenseCategories = [
+  {
+    name: 'Tiền thuê nhà',
+    iconName: 'home',
+  },
+  {
+    name: 'Tiền subscription',
+    iconName: 'movie',
+  },
+  {
+    name: 'Tiền học phí',
+    iconName: 'school',
+  },
+];
+export const limitExpenseCategories = [
+  {
+    name: 'Ăn uống',
+    iconName: 'restaurant',
+  },
+  {
+    name: 'Mua sắm',
+    iconName: 'shopping-cart',
+  },
+  {
+    name: 'Đi chợ',
+    iconName: 'local-convenience-store',
+  },
+  {
+    name: 'Đi chơi',
+    iconName: 'nightlife',
+  },
+];

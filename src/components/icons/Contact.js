@@ -19,8 +19,12 @@ const Contact = ({
       disabled={disabled}
       onPress={() =>
         navigation.navigate('InternalTransfer', {
-          realName,
-          accountNumber,
+          receiver: {
+            realName,
+            accountNumber,
+            nickname,
+            bank,
+          },
         })
       }>
       <IconText iconName="account-circle" color="#0066B3" iconSize={iconSize} />

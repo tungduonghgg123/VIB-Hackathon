@@ -10,8 +10,8 @@ const InternalTransfer = ({route, navigation}) => {
   const [realName, setRealName] = useState('');
   useEffect(() => {
     if (route.params) {
-      setAccountNumber(route.params.accountNumber);
-      setRealName(route.params.realName);
+      setAccountNumber(route.params.receiver.accountNumber);
+      setRealName(route.params.receiver.realName);
     }
   }, [route.params]);
   return (
@@ -41,8 +41,12 @@ const InternalTransfer = ({route, navigation}) => {
         title="tiếp tục"
         onPress={() =>
           navigation.navigate('TransactionDetail', {
-            realName,
-            accountNumber,
+            receiver: {
+              accountNumber,
+              realName,
+              bank: 'VIB',
+            },
+            ...route.params,
           })
         }
       />

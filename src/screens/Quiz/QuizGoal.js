@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { ScrollView, View, TextInput, Text } from "react-native";
-import { SafeAreaView } from "react-native";
-import VIBButton from "../../components/VIBButton";
-import { Icon } from "react-native-elements";
-import * as Progress from "react-native-progress";
+import React from 'react';
+import {ScrollView, View, Text} from 'react-native';
+import {SafeAreaView} from 'react-native';
+import VIBButton from '../../components/VIBButton';
+import {Icon} from 'react-native-elements';
+import * as Progress from 'react-native-progress';
 
-const Quizgoal = ({ route, navigation }) => {
+const Quizgoal = ({onPressNext}) => {
   return (
     <SafeAreaView style={styles.container}>
       <Progress.Bar
@@ -49,20 +49,17 @@ const Quizgoal = ({ route, navigation }) => {
           </View>
         </View>
       </ScrollView>
-      <VIBButton
-        title="tiếp tục"
-        onPress={() => navigation.navigate("Overview")}
-      />
+      <VIBButton title="tiếp tục" onPress={onPressNext} />
     </SafeAreaView>
   );
 };
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: "#0066B3",
+    backgroundColor: '#0066B3',
   },
   heading: {
-    color: "#FAA934",
+    color: '#FAA934',
     fontSize: 30,
   },
   transferContainer: {
@@ -71,14 +68,14 @@ const styles = {
     flex: 1,
   },
   root: {
-    flexDirection: "column",
+    flexDirection: 'column',
     flex: 1,
   },
   rowContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     padding: 20,
-    alignItems: "center",
-    backgroundColor: "white",
+    alignItems: 'center',
+    backgroundColor: 'white',
     borderRadius: 10,
     marginTop: 16,
   },
@@ -88,30 +85,30 @@ const styles = {
   },
   inputContainer: {
     flex: 1,
-    backgroundColor: "white",
-    flexDirection: "row",
+    backgroundColor: 'white',
+    flexDirection: 'row',
     width: 160,
     height: 44,
-    alignItems: "center",
-    backgroundColor: "#004A82",
+    alignItems: 'center',
+    backgroundColor: '#004A82',
     paddingRight: 10,
   },
   textInput: {
     height: 44,
     width: 120,
     padding: 10,
-    color: "white",
+    color: 'white',
     fontSize: 18,
   },
   addButtonBox: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     height: 40,
   },
   addButton: {
     width: 150,
     height: 40,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     borderRadius: 10,
     marginTop: 30,
   },
