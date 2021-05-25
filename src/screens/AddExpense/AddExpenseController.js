@@ -15,6 +15,8 @@ import {TouchableOpacity} from 'react-native';
 import {MAKE_TRANSACTION} from '../../model/query';
 import {useMutation} from '@apollo/client';
 
+import moment from 'moment';
+console.log(moment('25/05/2021', 'DD/MM/YYYY'));
 const AddExpenseController = ({navigation}) => {
   const [makeTransaction, {data, loading, error}] = useMutation(
     MAKE_TRANSACTION,
@@ -32,7 +34,7 @@ const AddExpenseController = ({navigation}) => {
           makeTransaction({
             variables: {
               transaction: {
-                from: moneySource[budget.name].value,
+                from: moneySource[budget.name]?.value || 'VIB',
                 amount: parseInt(amount),
                 note,
                 category: fullCategory,
@@ -56,13 +58,9 @@ const AddExpenseController = ({navigation}) => {
   const [fullCategory, setFullCategory] = useState('');
   const [budget, setBudget] = useState('');
 
-  const [recordFilePath, setRecordFilePath] = useState('');
-  const [showVoiceRecordingModal, setShowVoiceRecordingModal] = useState(false);
   const [voiceRecognitionResult, setVoiceRecognitionResult] = useState('');
   const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
-  console.log(date.getTime());
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
@@ -72,11 +70,15 @@ const AddExpenseController = ({navigation}) => {
   console.log(budget);
   useEffect(() => {
     //có giá trị k có gtri
-    if (voiceRecognitionResult != null) {
+    if (voiceRecognitionResult) {
+      setAmount(voiceRecognitionResult.money?.toString() || '0');
+      setDate(moment(voiceRecognitionResult.date, 'DD/MM/YYYY')._d);
       // setFullCategory('' + voiceRecognitionResult.spending_type);
+      setBudget({name: voiceRecognitionResult.budget_type});
       // categories = '' + voiceRecognitionResult.money;
     }
   }, [voiceRecognitionResult]);
+
   return (
     <AddExpense
       date={date}
@@ -88,6 +90,8 @@ const AddExpenseController = ({navigation}) => {
       setNote={setNote}
       setFullCategory={setFullCategory}
       setBudget={setBudget}
+      budget={budget}
+      setVoiceRecognitionResult={setVoiceRecognitionResult}
     />
   );
 };

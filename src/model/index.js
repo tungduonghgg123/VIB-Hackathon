@@ -5,6 +5,7 @@ import {getData} from '../helper/asyncStorage';
 import {onError} from '@apollo/client/link/error';
 
 const httpLink = createHttpLink({
+  // uri: 'http://172.20.10.6:4000/graphql',
   uri: 'http://localhost:4000/graphql',
 });
 // Log any GraphQL errors or network error that occurred
@@ -27,7 +28,7 @@ const authLink = setContext(async (_, {headers}) => {
   return {
     headers: {
       ...headers,
-      userid: userid,
+      userid,
     },
   };
 });

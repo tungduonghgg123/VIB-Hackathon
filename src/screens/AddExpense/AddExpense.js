@@ -19,19 +19,13 @@ const AddExpense = ({
   setNote,
   setFullCategory,
   setBudget,
+  budget,
+  setVoiceRecognitionResult,
 }) => {
   const [recordFilePath, setRecordFilePath] = useState('');
   const [showVoiceRecordingModal, setShowVoiceRecordingModal] = useState(false);
-  const [voiceRecognitionResult, setVoiceRecognitionResult] = useState('');
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
-  useEffect(() => {
-    //có giá trị k có gtri
-    if (voiceRecognitionResult != null) {
-      // setFullCategory('' + voiceRecognitionResult.spending_type);
-      // categories = '' + voiceRecognitionResult.money;
-    }
-  }, [voiceRecognitionResult]);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.iconWrapper}>
@@ -73,6 +67,7 @@ const AddExpense = ({
         setText={setNote}
         placeholder={'Ghi chú cho khoản chi tiêu (không bắt buộc)'}
       />
+
       <SelectCategories
         categories={moneySource}
         setFullCategory={setBudget}
