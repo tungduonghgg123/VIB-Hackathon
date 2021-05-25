@@ -27,7 +27,7 @@ const authLink = setContext(async (_, {headers}) => {
   return {
     headers: {
       ...headers,
-      userid,
+      userid: userid,
     },
   };
 });

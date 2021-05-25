@@ -57,7 +57,10 @@ const Dashboard = ({imageHeight, setImageHeight, loading, error, navigate}) => {
           </View>
         </View>
       </ImageBackground>
-      <LoadingOverlay isVisible={loading || error} shouldShowError={error} />
+      <LoadingOverlay
+        isVisible={loading || error ? true : false}
+        shouldShowError={error}
+      />
     </SafeAreaView>
   );
 };

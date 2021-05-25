@@ -1,31 +1,27 @@
-import React, {useEffect, useState} from 'react';
-import {useMutation} from '@apollo/client';
-import {storeData} from '../../helper/asyncStorage';
-import {REGISTER_USER} from '../../model/query';
+import React, {useState} from 'react';
 import Dashboard from './Dashboard';
+import DashboardViewModel from './DashboardViewModel';
 
 const DashboardController = ({navigation}) => {
   const [imageHeight, setImageHeight] = useState(0);
-  const [registerUser, {data, loading, error}] = useMutation(REGISTER_USER);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
   const navigate = destination => () => {
     navigation.navigate(destination);
   };
-  useEffect(() => {
-    registerUser();
-  }, [registerUser]);
-  useEffect(() => {
-    if (data) {
-      storeData('userid', data.registerUser.id);
-    }
-  }, [data]);
+
   return (
-    <Dashboard
-      imageHeight={imageHeight}
-      setImageHeight={setImageHeight}
-      loading={loading}
-      error={error}
-      navigate={navigate}
-    />
+    <>
+      <DashboardViewModel setLoading={setLoading} setError={setError} />
+      <Dashboard
+        imageHeight={imageHeight}
+        setImageHeight={setImageHeight}
+        loading={loading}
+        error={error}
+        navigate={navigate}
+      />
+    </>
   );
 };
 
