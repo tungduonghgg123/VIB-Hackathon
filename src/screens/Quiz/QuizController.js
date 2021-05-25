@@ -1,9 +1,9 @@
 import React, {useRef, useState} from 'react';
 import {Text, View} from 'react-native';
-import Quizbudget from './Quiz-budget';
-import QuizFixCost from './Quiz-fixcost';
-import Quizavecost from './Quiz-avecost';
-import Quizgoal from './Quiz-goal';
+import Quizbudget from './QuizBudget';
+import QuizFixCost from './QuizFixCost';
+import Quizavecost from './QuizAveCost';
+import Quizgoal from './QuizGoal';
 import {HeaderBackButton} from '@react-navigation/stack';
 
 import {LogBox} from 'react-native';
