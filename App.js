@@ -18,7 +18,6 @@ import Confirm from './src/screens/Confirm/Confirm';
 import AddExpense from './src/screens/AddExpense/AddExpense';
 import {TouchableOpacity, Text} from 'react-native';
 import QuizController from './src/screens/Quiz/QuizController';
-import Overview from './src/screens/BudgetPlan/Overview';
 import FixBudget from './src/screens/BudgetPlan/FixBudget';
 import NonFixBudget from './src/screens/BudgetPlan/NonFixBudget';
 import SpendingTracker from './src/screens/BudgetPlan/SpendingTracker';
@@ -26,6 +25,7 @@ import SpendingTracker from './src/screens/BudgetPlan/SpendingTracker';
 import {ApolloProvider} from '@apollo/client/react';
 import client from './src/model';
 import DashboardController from './src/screens/Dashboard/DashboardController';
+import OverviewController from './src/screens/BudgetPlan/OverviewController';
 
 const Stack = createStackNavigator();
 
@@ -108,7 +108,7 @@ function App() {
             />
             <Stack.Screen
               name="Overview"
-              component={Overview}
+              component={OverviewController}
               options={({navigation}) => ({
                 title: 'Quản lý tài chính',
                 headerLeft: props => (

@@ -1,23 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {ScrollView, View, Text, Image, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native';
 import {Icon} from 'react-native-elements';
 import * as Progress from 'react-native-progress';
-import {useQuery} from '@apollo/client';
-import {QUERY_QUIZ} from '../../model/query';
 import {formatMoney} from '../../helper';
-const extractRemainingPercantage = expense => {
-  let total = 0;
-  let used = 0;
-  expense.forEach(e => {
-    total += e.maxAmount;
-    used += e.currentAmount;
-  });
-  return total === 0 ? 1 : used / total;
-};
-const Overview = ({route, navigation}) => {
-  const {loading, error, data} = useQuery(QUERY_QUIZ);
-  const [derivedInformation, setDerivedInformation] = useState({});
+
+const Overview = ({data, navigate}) => {
   const {
     remainingBudget = 0,
     budgetLeftInPercentage = 1,
@@ -25,43 +13,15 @@ const Overview = ({route, navigation}) => {
     monthlyExpenseCount = 0,
     monthlyExpenseLeftInPercentage = 0,
     limitExpenseLeftInPercentage = 0,
-  } = derivedInformation;
-  useEffect(() => {
-    if (!data) {
-      return;
-    }
-    if (!data.user.quizs?.[0]) {
-      return;
-    }
-    const {
-      limitExpense,
-      monthlyExpense,
-      monthlyTotalBudget,
-      cash,
-      ewallet,
-      out,
-      vib,
-    } = data.user.quizs[0];
-    setDerivedInformation({
-      remainingBudget: cash + ewallet + out + vib,
-      budgetLeftInPercentage: monthlyTotalBudget
-        ? (cash + ewallet + out + vib) / monthlyTotalBudget
-        : 1,
-      limitExpenseCount: limitExpense.length,
-      monthlyExpenseCount: monthlyExpense.length,
-      monthlyExpenseLeftInPercentage: extractRemainingPercantage(
-        monthlyExpense,
-      ),
-      limitExpenseLeftInPercentage: extractRemainingPercantage(limitExpense),
-    });
-  }, [data]);
+  } = data || {};
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.transferContainer}>
         <View style={styles.root}>
           <TouchableOpacity
             style={styles.rowContainer}
-            onPress={() => navigation.navigate('SpendingTracker')}>
+            onPress={navigate('SpendingTracker')}>
             <View style={styles.rowContainerHeader}>
               <Text style={styles.text}> SỔ CHI TIÊU </Text>
               <Icon
@@ -98,7 +58,7 @@ const Overview = ({route, navigation}) => {
 
           <TouchableOpacity
             style={styles.rowContainerBig}
-            onPress={() => navigation.navigate('FixBudget')}>
+            onPress={navigate('FixBudget')}>
             <View style={styles.rowContainerHeader}>
               <Text style={styles.text}> CHI TIÊU CỐ ĐỊNH </Text>
               <Icon
@@ -135,7 +95,7 @@ const Overview = ({route, navigation}) => {
 
           <TouchableOpacity
             style={styles.rowContainerBig}
-            onPress={() => navigation.navigate('NonFixBudget')}>
+            onPress={navigate('NonFixBudget')}>
             <View style={styles.rowContainerHeader}>
               <Text style={styles.text}> KẾ HOẠCH CHI TIÊU </Text>
               <Icon
