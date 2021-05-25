@@ -114,7 +114,7 @@ function App() {
                 headerLeft: props => (
                   <HeaderBackButton
                     {...props}
-                    onPress={() => navigation.navigate('Dashboard')}
+                    onPress={() => navigation.popToTop()}
                   />
                 ),
               })}
