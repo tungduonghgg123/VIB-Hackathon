@@ -2,6 +2,7 @@ import React from 'react';
 import {TextInput} from 'react-native';
 import Card from './Card';
 const InputAmount = ({amount, setAmount}) => {
+
   return (
     <Card style={styles.inputAmountContainer}>
       <TextInput

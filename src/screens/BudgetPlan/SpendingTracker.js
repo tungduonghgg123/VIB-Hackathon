@@ -126,7 +126,7 @@ const SpendingTracker = ({ route, navigation }) => {
         ))}
       </ ScrollView>
       <View style={{flex:1, marginRight: 40}}>
-        <TouchableHighlight style={{position:'absolute',bottom:10,alignSelf:'flex-end'}}>
+        <TouchableHighlight style={{position:'absolute',bottom:10,alignSelf:'flex-end'}} onPress={()=> navigation.navigate("AddExpense")}>
             <Icon name="add" style={styles.icon} size={40} color="white"></Icon>
         </TouchableHighlight>
       </View>
